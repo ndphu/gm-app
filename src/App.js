@@ -3,6 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Redirect from "react-router-dom/es/Redirect";
 import HomePage from "./pages/UserPage";
+import HomeComponent from './component/HomeComponent';
 
 class App extends Component {
   render() {
@@ -10,8 +11,8 @@ class App extends Component {
       <MuiThemeProvider>
         <BrowserRouter>
           <Switch>
-            <Route path='/gm/user' component={HomePage}/>
-            <Redirect path='/' to='/gm/user'/>
+            <Route path='/gm/#/user' component={HomePage}/>
+            <Route path={'/gm/#/user/home'} component={HomeComponent}/>
           </Switch>
         </BrowserRouter>
       </MuiThemeProvider>

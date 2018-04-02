@@ -4,7 +4,7 @@ class MovieService {
   currentMovie;
 
   getMovies = (page, size) => {
-    return api.get(`/movie/paginated?page=${page}&size=${size}`)
+    return api.get(`/paginated?page=${page}&size=${size}`)
   };
 
   getMovie = (movieId) => {

@@ -1,0 +1,23 @@
+{
+  "name": "gm-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-scripts": "1.1.1",
+    "material-ui": "latest",
+    "react-router": "latest",
+    "redux": "latest",
+    "react-redux": "latest",
+    "react-router-dom": "latest",
+    "jwt-decode": "latest",
+    "whatwg-fetch": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

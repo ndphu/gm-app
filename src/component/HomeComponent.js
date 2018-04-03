@@ -3,6 +3,7 @@ import movieService from '../service/MovieService';
 import MovieCard from './MovieCard';
 import {Button, Col, Grid, Row} from 'react-bootstrap';
 import {FlatButton, RaisedButton} from 'material-ui';
+import MovieGridComponent from "./MovieGridComponent";
 
 class HomeComponent extends React.Component {
   constructor(props) {
@@ -28,34 +29,20 @@ class HomeComponent extends React.Component {
 
   retrieveMovies = () => {
     movieService.getMovies(this.state.page, this.state.pageSize).then(paginated =>
-        this.setState({ movies: [...this.state.movies, ...paginated.items] })
-      //this.setState({movies: paginated.items})
+      this.setState({movies: [...this.state.movies, ...paginated.items]})
     )
   };
 
   handleMovieClick = (m) => {
-    console.log(m);
-    this.props.history.push(`/gm/user/watch/${m.id}`)
+    this.props.history.push(`/gm/movie/${m.id}`)
   };
 
   render = () => (
     <div>
-      <Grid>
-        <Row className="show-grid">
-          {this.state.movies.map((m) => (
-            <Col xs={6} sm={4} md={3} lg={2} key={`movie-item-${m.id}`}>
-              <MovieCard
-                         movie={m}
-                         onClick={this.handleMovieClick}/>
-            </Col>
-          ))}
-        </Row>
-        <Row>
-          <RaisedButton label="Next" primary={true}
-                        style={{margin: 16}}
-          onClick={this.nextPageClick}/>
-        </Row>
-      </Grid>
+      <MovieGridComponent movies={this.state.movies} onItemClick={this.handleMovieClick}/>
+      <RaisedButton label="Next" primary={true}
+                    style={{margin: 16}}
+                    onClick={this.nextPageClick}/>
     </div>
   )
 

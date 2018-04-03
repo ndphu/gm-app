@@ -14,7 +14,9 @@
     "react-router-dom": "latest",
     "jwt-decode": "latest",
     "whatwg-fetch": "latest",
-    "react-bootstrap": "latest"
+    "react-bootstrap": "latest",
+    "react-router-bootstrap": "latest",
+    "query-string": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

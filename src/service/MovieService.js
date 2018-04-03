@@ -11,6 +11,10 @@ class MovieService {
     return api.get(`/movie/${movieId}`)
   };
 
+  search = (q, page, size) => {
+    return api.get(`/search?q=${q}&page=${page}&size=${size}`)
+  };
+
   setCurrentMovie = (m) => {
     localStorage.setItem('currentMovie', JSON.stringify(m));
   };

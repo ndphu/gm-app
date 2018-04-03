@@ -2,8 +2,7 @@ import React from 'react';
 import appStyle from '../style/Style';
 import movieService from '../service/MovieService';
 import {Grid, PageHeader, Row, Well} from 'react-bootstrap';
-import {Avatar, Chip, Paper} from 'material-ui';
-import AccountCircle from 'material-ui/svg-icons/action/account-circle';
+import {Chip, Paper} from 'material-ui';
 
 class WatchComponent extends React.Component {
   constructor(props) {
@@ -41,7 +40,7 @@ class WatchComponent extends React.Component {
     <div>
       {this.state.movie &&
       <Grid>
-        <Row>
+        <Row id={'movie-component-paper-row'}>
           <Paper style={{paddingLeft: 16, paddingRight: 16, paddingBottom: 16, marginBottom: 16}}>
             <PageHeader style={appStyle.headline}>{this.state.movie.title}</PageHeader>
             <div style={appStyle.videoPlayerWrapper}>

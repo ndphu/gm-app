@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import HomeComponent from './component/HomeComponent';
 import NavBar from "./component/NavBar";
 import RandomComponent from "./component/RandomComponent";
@@ -17,7 +17,6 @@ class App extends Component {
             <Route path={'/'} render={(props) => <NavBar {...props} />}/>
             <div style={{paddingTop: 70}}>
               <Switch>
-                <Route exact={true} path="/" component={HomeComponent} />
                 <Route path={'/gm/home'} component={HomeComponent}/>
                 <Route path={'/gm/random'} component={RandomComponent}/>
                 <Route path={'/gm/search'} component={SearchComponent}/>

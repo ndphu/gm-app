@@ -10,7 +10,7 @@ class SearchComponent extends React.Component {
       query: '',
       movies: [],
       page: 1,
-      pageSize: 24,
+      pageSize: 100,
     }
   }
 

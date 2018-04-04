@@ -51,7 +51,7 @@ class MovieCard extends React.Component {
 
   render = () => (
     <Paper style={style.container} onClick={this.handleMovieClick}>
-      <img style={style.cover} src={this.props.movie.poster}/>
+      <img style={style.cover} src={this.props.movie.poster} alt={this.props.movie.title}/>
       <div style={style.titleContainer}>
         <span style={style.title}>{this.props.movie.title}</span>
       </div>

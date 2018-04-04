@@ -1,6 +1,3 @@
-'use strict';
-// const strictUriEncode = require('strict-uri-encode');
-// const decodeComponent = require('decode-uri-component');
 import strictUriEncode from './strict-uri-encode';
 import decodeComponent from './decode-uri-component';
 

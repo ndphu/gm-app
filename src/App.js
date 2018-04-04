@@ -17,11 +17,14 @@ class App extends Component {
             <Route path={'/'} render={(props) => <NavBar {...props} />}/>
             <div style={{paddingTop: 70}}>
               <Switch>
-                <Route path={'/gm/home'} component={HomeComponent}/>
+                <Route path={'/gm/home/page/:page'} component={HomeComponent}/>
                 <Route path={'/gm/random'} component={RandomComponent}/>
-                <Route path={'/gm/search'} component={SearchComponent}/>
+                <Route path={'/gm/search/page/:page'} component={SearchComponent}/>
                 <Route path={'/gm/favorites'} component={FavoritesComponent}/>
                 <Route path={'/gm/movie/:movieId'} component={MovieComponent}/>
+                <Redirect exact={true} from={'/gm'} to={'/gm/home'}/>
+                <Redirect exact={true} from={'/gm/home'} to={'/gm/home/page'}/>
+                <Redirect exact={true} from={'/gm/home/page'} to={'/gm/home/page/1'}/>
               </Switch>
             </div>
           </div>

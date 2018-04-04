@@ -16,14 +16,14 @@ class NavBar extends React.Component {
     const query = e.target.value.trim();
     if (e.key === 'Enter' && query) {
       //console.log(this.props)
-      this.props.history.push(`/gm/search?q=${query}`)
+      this.props.history.push(`/gm/search/page/1?q=${query}`)
     }
   };
 
   render = () => (
     <Navbar inverse collapseOnSelect fixedTop>
       <Navbar.Header>
-        <Link to={'/gm/home'}>
+        <Link to={'/gm/home/page/1'}>
           <Navbar.Brand>Movies</Navbar.Brand>
         </Link>
         <Navbar.Toggle/>

@@ -33,6 +33,9 @@ class NavBar extends React.Component {
           <LinkContainer to={'/gm/home'}>
             <NavItem eventKey={1}>Home</NavItem>
           </LinkContainer>
+          <LinkContainer to={'/gm/category'}>
+            <NavItem eventKey={5}>Categories</NavItem>
+          </LinkContainer>
           <LinkContainer to={'/gm/random'}>
             <NavItem eventKey={2}>Random</NavItem>
           </LinkContainer>

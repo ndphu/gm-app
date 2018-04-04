@@ -7,6 +7,8 @@ import RandomComponent from "./component/RandomComponent";
 import SearchComponent from "./component/SearchComponent";
 import FavoritesComponent from "./component/FavoritesComponent";
 import MovieComponent from "./component/MovieComponent";
+import CategoryPage from './component/category/CategoryPage';
+import ActorPage from './component/actor/ActorPage';
 
 class App extends Component {
   render() {
@@ -22,6 +24,8 @@ class App extends Component {
                 <Route path={'/gm/search/page/:page'} component={SearchComponent}/>
                 <Route path={'/gm/favorites'} component={FavoritesComponent}/>
                 <Route path={'/gm/movie/:movieId'} component={MovieComponent}/>
+                <Route path={'/gm/category'} component={CategoryPage}/>
+                <Route path={'/gm/actor'} component={ActorPage}/>
                 <Redirect exact={true} from={'/gm'} to={'/gm/home'}/>
                 <Redirect exact={true} from={'/gm/home'} to={'/gm/home/page'}/>
                 <Redirect exact={true} from={'/gm/home/page'} to={'/gm/home/page/1'}/>

@@ -9,19 +9,21 @@ class WatchComponent extends React.Component {
     super(props);
     this.state = {
       movie: null
-    }
+    };
+    this.handleActorClick.bind(this);
+    this.handleCategoryClick.bind(this);
   }
 
   handleCountryClick = () => {
 
   };
 
-  handleCategoryClick = () => {
-
+  handleCategoryClick = (c) => {
+    this.props.history.push(`/gm/category/${c.key}/page/1`)
   };
 
-  handleActorClick = () => {
-
+  handleActorClick = (a) => {
+    this.props.history.push(`/gm/actor/${a.key}/page/1`)
   };
 
   handleDirectorClick = () => {
@@ -64,10 +66,10 @@ class WatchComponent extends React.Component {
             <h4>Diễn viên:</h4>
             <div>
               {this.state.movie.actors.map(a => (
-                <Chip key={'chip-actor-' + a}
-                  onClick={()=>this.handleActorClick}
+                <Chip key={'chip-actor-' + a.key}
+                  onClick={()=>this.handleActorClick(a)}
                   style={{margin: 4}}>
-                  {a}
+                  {a.title}
                 </Chip>
               ))
               }
@@ -75,13 +77,12 @@ class WatchComponent extends React.Component {
             <h4>Thể loại:</h4>
             <div>
               {this.state.movie.categories.map(c => (
-                <Chip key={'chip-category-' + c}
-                      onClick={()=>this.handleCategoryClick}
+                <Chip key={'chip-category-' + c.key}
+                      onClick={()=>this.handleCategoryClick(c)}
                       style={{margin: 4}}>
-                  {c}
+                  {c.title}
                 </Chip>
-              ))
-              }
+              ))}
             </div>
             <h4>Quốc Gia:</h4>
             <div>
@@ -91,8 +92,7 @@ class WatchComponent extends React.Component {
                       style={{margin: 4}}>
                   {c}
                 </Chip>
-              ))
-              }
+              ))}
             </div>
           </Paper>
         </Row>

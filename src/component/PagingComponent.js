@@ -47,7 +47,7 @@ class PagingComponent extends React.Component {
       <Pagination.Item onClick={() => this.props.onPageClick(this.state.prevPrev)}>{this.state.prevPrev}</Pagination.Item>}
       {this.state.prev >= 1 &&
       <Pagination.Item onClick={() => this.props.onPageClick(this.state.prev) }>{this.state.prev}</Pagination.Item>}
-      <Pagination.Item active>{this.state.page}</Pagination.Item>
+      {this.state.totalPage > 1 && <Pagination.Item active>{this.state.page}</Pagination.Item>}
       {this.state.next <= this.state.totalPage &&
       <Pagination.Item onClick={() => this.props.onPageClick(this.state.next)}>{this.state.next}</Pagination.Item>}
       {this.state.nextNext <= this.state.totalPage &&

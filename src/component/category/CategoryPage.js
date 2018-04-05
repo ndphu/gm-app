@@ -6,9 +6,9 @@ import CategorySelectionComponent from './CategorySelectionComponent';
 class CategoryPage extends React.Component {
   render = () => (
     <div>
-      <Route path={'/gm/category/:categoryKey'} component={CategorySelectionComponent}/>
-      <Route path={'/gm/category/:categoryKey/page/:page'} component={CategoryComponent}/>
-      <Route exact path={'/gm/category'} render={()=><Redirect to={'/gm/category/kinh-di/page/1'}/>}/>
+      <Route path={'/category/:categoryKey'} component={CategorySelectionComponent}/>
+      <Route path={'/category/:categoryKey/page/:page'} component={CategoryComponent}/>
+      <Route exact path={'/category'} render={()=><Redirect to={'/category/kinh-di/page/1'}/>}/>
     </div>
   )
 }

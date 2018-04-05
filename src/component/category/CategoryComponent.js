@@ -41,11 +41,11 @@ class CategoryComponent extends React.Component {
   };
 
   handleMovieClick = (m) => {
-    this.props.history.push(`/gm/movie/${m.id}`)
+    this.props.history.push(`/movie/${m.id}`)
   };
 
   paginationPageClick = (page) => {
-    this.props.history.push(`/gm/category/${this.props.match.params.categoryKey}/page/${page}`);
+    this.props.history.push(`/category/${this.props.match.params.categoryKey}/page/${page}`);
   };
 
   render = () => (

@@ -19,11 +19,11 @@ class WatchComponent extends React.Component {
   };
 
   handleCategoryClick = (c) => {
-    this.props.history.push(`/gm/category/${c.key}/page/1`)
+    this.props.history.push(`/category/${c.key}/page/1`)
   };
 
   handleActorClick = (a) => {
-    this.props.history.push(`/gm/actor/${a.key}/page/1`)
+    this.props.history.push(`/actor/${a.key}/page/1`)
   };
 
   handleDirectorClick = () => {
@@ -53,47 +53,47 @@ class WatchComponent extends React.Component {
             <h4>Nội dung:</h4>
             <Well bsSize="small">{this.state.movie.content}</Well>
             <h4>Đạo diễn:</h4>
-            <div>
-              {this.state.movie.directors.map(d => (
-                <Chip key={'chip-director-' + d}
-                      onClick={()=>this.handleDirectorClick}
-                      style={{margin: 4}}>
-                  {d}
-                </Chip>
-              ))
-              }
-            </div>
-            <h4>Diễn viên:</h4>
-            <div>
-              {this.state.movie.actors.map(a => (
-                <Chip key={'chip-actor-' + a.key}
-                  onClick={()=>this.handleActorClick(a)}
-                  style={{margin: 4}}>
-                  {a.title}
-                </Chip>
-              ))
-              }
-            </div>
-            <h4>Thể loại:</h4>
-            <div>
-              {this.state.movie.categories.map(c => (
-                <Chip key={'chip-category-' + c.key}
-                      onClick={()=>this.handleCategoryClick(c)}
-                      style={{margin: 4}}>
-                  {c.title}
-                </Chip>
-              ))}
-            </div>
-            <h4>Quốc Gia:</h4>
-            <div>
-              {this.state.movie.countries.map(c => (
-                <Chip key={'chip-country-' + c}
-                      onClick={()=>this.handleCountryClick}
-                      style={{margin: 4}}>
-                  {c}
-                </Chip>
-              ))}
-            </div>
+            {/*<div>*/}
+              {/*{this.state.movie.directors.map(d => (*/}
+                {/*<Chip key={'chip-director-' + d}*/}
+                      {/*onClick={()=>this.handleDirectorClick()}*/}
+                      {/*style={{margin: 4}}>*/}
+                  {/*{d}*/}
+                {/*</Chip>*/}
+              {/*))*/}
+              {/*}*/}
+            {/*</div>*/}
+            {/*<h4>Diễn viên:</h4>*/}
+            {/*<div>*/}
+              {/*{this.state.movie.actors.map(a => (*/}
+                {/*<Chip key={'chip-actor-' + a.key}*/}
+                  {/*onClick={()=>this.handleActorClick(a)}*/}
+                  {/*style={{margin: 4}}>*/}
+                  {/*{a.title}*/}
+                {/*</Chip>*/}
+              {/*))*/}
+              {/*}*/}
+            {/*</div>*/}
+            {/*<h4>Thể loại:</h4>*/}
+            {/*<div>*/}
+              {/*{this.state.movie.categories.map(c => (*/}
+                {/*<Chip key={'chip-category-' + c.key}*/}
+                      {/*onClick={()=>this.handleCategoryClick(c)}*/}
+                      {/*style={{margin: 4}}>*/}
+                  {/*{c.title}*/}
+                {/*</Chip>*/}
+              {/*))}*/}
+            {/*</div>*/}
+            {/*<h4>Quốc Gia:</h4>*/}
+            {/*<div>*/}
+              {/*{this.state.movie.countries.map(c => (*/}
+                {/*<Chip key={'chip-country-' + c}*/}
+                      {/*onClick={()=>this.handleCountryClick()}*/}
+                      {/*style={{margin: 4}}>*/}
+                  {/*{c}*/}
+                {/*</Chip>*/}
+              {/*))}*/}
+            {/*</div>*/}
           </Paper>
         </Row>
       </Grid>

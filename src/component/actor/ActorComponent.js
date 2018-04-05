@@ -40,11 +40,11 @@ class ActorComponent extends React.Component {
   };
 
   handleMovieClick = (m) => {
-    this.props.history.push(`/gm/movie/${m.id}`)
+    this.props.history.push(`/movie/${m.id}`)
   };
 
   paginationPageClick = (page) => {
-    this.props.history.push(`/gm/actor/${this.props.match.params.page}/page/${page}`);
+    this.props.history.push(`/actor/${this.props.match.params.page}/page/${page}`);
   };
 
   render = () => (

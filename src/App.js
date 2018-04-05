@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
 import HomeComponent from './component/HomeComponent';
 import NavBar from "./component/NavBar";
 import RandomComponent from "./component/RandomComponent";
@@ -14,25 +14,25 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <BrowserRouter>
+        <HashRouter>
           <div>
             <Route path={'/'} render={(props) => <NavBar {...props} />}/>
             <div style={{paddingTop: 70}}>
               <Switch>
-                <Route path={'/gm/home/page/:page'} component={HomeComponent}/>
-                <Route path={'/gm/random'} component={RandomComponent}/>
-                <Route path={'/gm/search/page/:page'} component={SearchComponent}/>
-                <Route path={'/gm/favorites'} component={FavoritesComponent}/>
-                <Route path={'/gm/movie/:movieId'} component={MovieComponent}/>
-                <Route path={'/gm/category'} component={CategoryPage}/>
-                <Route path={'/gm/actor'} component={ActorPage}/>
-                <Redirect exact={true} from={'/gm'} to={'/gm/home'}/>
-                <Redirect exact={true} from={'/gm/home'} to={'/gm/home/page'}/>
-                <Redirect exact={true} from={'/gm/home/page'} to={'/gm/home/page/1'}/>
+                <Route path={'/home/page/:page'} component={HomeComponent}/>
+                <Route path={'/random'} component={RandomComponent}/>
+                <Route path={'/search/page/:page'} component={SearchComponent}/>
+                <Route path={'/favorites'} component={FavoritesComponent}/>
+                <Route path={'/movie/:movieId'} component={MovieComponent}/>
+                <Route path={'/category'} component={CategoryPage}/>
+                <Route path={'/actor'} component={ActorPage}/>
+                <Redirect exact={true} from={'/'} to={'/home'}/>
+                <Redirect exact={true} from={'/home'} to={'/home/page'}/>
+                <Redirect exact={true} from={'/home/page'} to={'/home/page/1'}/>
               </Switch>
             </div>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </MuiThemeProvider>
     );
   }

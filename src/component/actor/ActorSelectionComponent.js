@@ -23,7 +23,7 @@ class ActorSelectionComponent extends React.Component {
     this.setState({
       currentCategory: item
     });
-    this.props.history.push(`/gm/actor/${item.key}/page/1`)
+    this.props.history.push(`/actor/${item.key}/page/1`)
   };
 
   retrieveCategories = () => {

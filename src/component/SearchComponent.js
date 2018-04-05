@@ -41,11 +41,11 @@ class SearchComponent extends React.Component {
   };
 
   handleItemClick = (m) => {
-    this.props.history.push(`/gm/movie/${m.id}`)
+    this.props.history.push(`/movie/${m.id}`)
   };
 
   paginationPageClick = (p) => {
-    this.props.history.push(`/gm/search/page/${p}?q=${this.state.query}`)
+    this.props.history.push(`/search/page/${p}?q=${this.state.query}`)
   };
 
   render = () => (

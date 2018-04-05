@@ -22,7 +22,7 @@ class CategorySelectionComponent extends React.Component {
     this.setState({
       currentCategory: item
     });
-    this.props.history.push(`/gm/category/${item.key}/page/1`)
+    this.props.history.push(`/category/${item.key}/page/1`)
   };
 
   retrieveCategories = () => {

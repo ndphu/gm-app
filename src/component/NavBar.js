@@ -1,5 +1,5 @@
 import React from "react";
-import {FormGroup, MenuItem, Nav, Navbar, NavDropdown, NavItem} from "react-bootstrap";
+import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {LinkContainer} from "react-router-bootstrap";
 import {TextField} from "material-ui";
@@ -16,40 +16,37 @@ class NavBar extends React.Component {
     const query = e.target.value.trim();
     if (e.key === 'Enter' && query) {
       //console.log(this.props)
-      this.props.history.push(`/gm/search/page/1?q=${query}`)
+      this.props.history.push(`/search/page/1?q=${query}`)
     }
   };
 
   render = () => (
-    <Navbar inverse collapseOnSelect fixedTop>
+    <Navbar inverse collapseOnSelect fixedTop id={'navbar-material'}>
       <Navbar.Header>
-        <Link to={'/gm/home/page/1'}>
+        <Link to={'/home/page/1'}>
           <Navbar.Brand>Movies</Navbar.Brand>
         </Link>
         <Navbar.Toggle/>
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <LinkContainer to={'/gm/home'}>
+          <LinkContainer to={'/home'}>
             <NavItem eventKey={1}>Home</NavItem>
           </LinkContainer>
-          <LinkContainer to={'/gm/category'}>
+          <LinkContainer to={'/category'}>
             <NavItem eventKey={5}>Categories</NavItem>
           </LinkContainer>
-          <LinkContainer to={'/gm/random'}>
-            <NavItem eventKey={2}>Random</NavItem>
-          </LinkContainer>
-          <LinkContainer to={'/gm/favorites'}>
+          <LinkContainer to={'/favorites'}>
             <NavItem eventKey={3}>Favorites</NavItem>
           </LinkContainer>
         </Nav>
-        <Navbar.Form pullLeft>
-          <FormGroup>
-            <TextField className={'text-field-quick-search'} style={{maxHeight: 34}}
-                       underlineStyle={{borderColor: grey300}}
-                       underlineFocusStyle={{borderColor: grey200}}
-                       hintText='Quick Search' onKeyPress={(e) => {this.onQuickSearchKeyPress(e)}}/>
-          </FormGroup>
+        <Navbar.Form pullRight>
+          <TextField className={'text-field-quick-search'} style={{maxHeight: 34}}
+                     underlineStyle={{borderColor: grey300}}
+                     underlineFocusStyle={{borderColor: grey200}}
+                     hintText='Quick Search' onKeyPress={(e) => {
+            this.onQuickSearchKeyPress(e)
+          }}/>
         </Navbar.Form>
         <Nav pullRight>
           <NavDropdown eventKey={4} title="More" id="basic-nav-dropdown">

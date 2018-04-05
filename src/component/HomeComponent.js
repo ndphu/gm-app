@@ -39,11 +39,11 @@ class HomeComponent extends React.Component {
   };
 
   handleMovieClick = (m) => {
-    this.props.history.push(`/gm/movie/${m.id}`)
+    this.props.history.push(`/movie/${m.id}`)
   };
 
   paginationPageClick = (page) => {
-    this.props.history.push(`/gm/home/page/${page}`);
+    this.props.history.push(`/home/page/${page}`);
   };
 
   render = () => (

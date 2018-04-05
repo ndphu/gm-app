@@ -28,10 +28,10 @@ class CategorySelectionComponent extends React.Component {
   retrieveCategories = () => {
     if (this.state.categories.length === 0) {
       categoryService.getCategories().then(categories => {
-        const list = categories.map((e) => {
-          return Object.assign({}, {key: e.key.toLowerCase().replace(/ /g, '-')}, {title: e.title.toUpperCase()})
-        });
-        list.sort(function (c1, c2) {
+        // const list = categories.map((e) => {
+        //   return Object.assign({}, {key: e.key.toLowerCase().replace(/ /g, '-')}, {title: e.title.toUpperCase()})
+        // });
+        categories.content.sort(function (c1, c2) {
           if (c1.key < c2.key) {
             return -1;
           } else if (c1.key > c2.key){
@@ -41,8 +41,8 @@ class CategorySelectionComponent extends React.Component {
           }
         });
         this.setState({
-          categories: list,
-          currentCategory: list.filter(cat => cat.key === this.props.match.params.categoryKey)[0],
+          categories: categories.content,
+          currentCategory: categories.content.filter(cat => cat.key === this.props.match.params.categoryKey)[0],
         });
       });
     }

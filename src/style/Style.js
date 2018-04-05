@@ -22,7 +22,8 @@ const appStyle = {
   headline: {
     fontSize: 24,
     fontWeight: 400,
-    padding: 2,
+    paddingLeft: 8,
+    paddingRight: 8,
   },
   content: {
     position: 'fixed',
@@ -37,6 +38,8 @@ const appStyle = {
     paddingRight: 8,
   },
   videoPlayerWrapper: {
+    paddingLeft: 8,
+    paddingRight: 8,
   },
   videoPlayer: {
     maxWidth: '100%',

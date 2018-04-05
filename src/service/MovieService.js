@@ -4,7 +4,7 @@ class MovieService {
   currentMovie;
 
   getMovies = (page, size) => {
-    return api.get(`/paginated?page=${page}&size=${size}`)
+    return api.get(`/movie?page=${page}&size=${size}`)
   };
 
   getMoviesByActor = (actoryKey, page, size) => {
@@ -19,8 +19,8 @@ class MovieService {
     return api.get(`/movie/${movieId}`)
   };
 
-  search = (q, page, size) => {
-    return api.get(`/search?q=${q}&page=${page}&size=${size}`)
+  searchByTitle = (q, page, size) => {
+    return api.get(`/search/byTitle?query=${q}&page=${page}&size=${size}`)
   };
 
   setCurrentMovie = (m) => {

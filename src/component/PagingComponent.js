@@ -6,7 +6,7 @@ class PagingComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 1
+      paging: null,
     }
   }
 
@@ -21,44 +21,25 @@ class PagingComponent extends React.Component {
   };
 
   updateState = (paging) => {
-    const page = paging.page;
-    this.setState({
-      page: page,
-      prev10: page - 10,
-      prevPrev: page - 2,
-      prev: page - 1,
-      next: page + 1,
-      nextNext: page + 2,
-      next10: page + 10,
-      totalItem: paging.totalItem,
-      totalPage: paging.totalPage,
-    });
+    this.setState({paging: paging})
   };
 
   render = () => (
-    <Pagination>
-      {this.state.prevPrev > 1 &&
-      <Pagination.First onClick={() => this.props.onPageClick(1)}/>}
-      {this.state.page > 1 &&
-      <Pagination.Prev onClick={() => this.props.onPageClick(this.state.page - 1)}/>}
-      {this.state.prev10 >= 1 &&
-      <Pagination.Item onClick={() => this.props.onPageClick(this.state.prev10)}>{this.state.prev10}</Pagination.Item>}
-      {this.state.prevPrev >= 1 &&
-      <Pagination.Item onClick={() => this.props.onPageClick(this.state.prevPrev)}>{this.state.prevPrev}</Pagination.Item>}
-      {this.state.prev >= 1 &&
-      <Pagination.Item onClick={() => this.props.onPageClick(this.state.prev) }>{this.state.prev}</Pagination.Item>}
-      {this.state.totalPage > 1 && <Pagination.Item active>{this.state.page}</Pagination.Item>}
-      {this.state.next <= this.state.totalPage &&
-      <Pagination.Item onClick={() => this.props.onPageClick(this.state.next)}>{this.state.next}</Pagination.Item>}
-      {this.state.nextNext <= this.state.totalPage &&
-      <Pagination.Item onClick={() => this.props.onPageClick(this.state.nextNext)}>{this.state.nextNext}</Pagination.Item>}
-      {this.state.next10 <= this.state.totalPage &&
-      <Pagination.Item onClick={() => this.props.onPageClick(this.state.next10)}>{this.state.next10}</Pagination.Item>}
-      {this.state.page < this.state.totalPage &&
-      <Pagination.Next onClick={() => this.props.onPageClick(this.state.page + 1)}/>}
-      {this.state.page < this.state.totalPage &&
-      <Pagination.Last onClick={() => this.props.onPageClick(this.state.totalPage)}/>}
-    </Pagination>
+    <div>
+      {this.state.paging && (
+        <Pagination>
+          {!this.state.paging.first && (
+            <Pagination.First onClick={() => this.props.onPageClick(1)}/>)}
+          {!this.state.paging.first && (
+            <Pagination.Prev onClick={() => this.props.onPageClick(this.state.paging.number)}/>)}
+          <Pagination.Item active>{this.state.paging.number + 1}</Pagination.Item>
+          {!this.state.paging.last && (
+            <Pagination.Next onClick={() => this.props.onPageClick(this.state.paging.number + 2)}/>)}
+          {!this.state.paging.last && (
+            <Pagination.Last onClick={() => this.props.onPageClick(this.state.paging.totalPages)}/>)}
+        </Pagination>
+      )}
+    </div>
   );
 }
 

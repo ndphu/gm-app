@@ -2,7 +2,7 @@ import React from 'react';
 import movieService from '../service/MovieService'
 import MovieGridComponent from "./MovieGridComponent";
 import queryString from '../utils/query-string';
-import {Grid, Row} from "react-bootstrap";
+import {Col, Grid, Row} from "react-bootstrap";
 import PagingComponent from "./PagingComponent";
 
 class SearchComponent extends React.Component {
@@ -16,14 +16,14 @@ class SearchComponent extends React.Component {
   }
 
   componentDidMount = () => {
-    this.performSearch(this.props.match.params.page, queryString.parse(this.props.location.search).q);
+    this.performSearch(this.props.match.params.page - 1, queryString.parse(this.props.location.search).q);
   };
 
   componentWillReceiveProps = (nextProps) => {
     const nextQuery = queryString.parse(nextProps.location.search).q;
     const nextPage = nextProps.match.params.page;
     if (nextQuery !== this.state.query || nextPage !== this.props.match.params.page) {
-      this.performSearch(nextPage, nextQuery);
+      this.performSearch(nextPage - 1, nextQuery);
     }
   };
 
@@ -31,16 +31,23 @@ class SearchComponent extends React.Component {
     this.setState({
       movies: []
     });
-    movieService.search(query, page, this.state.pageSize).then(paginated =>
+    movieService.searchByTitle(query, page, this.state.pageSize).then(paginated =>
       this.setState({
-        movies: paginated.items,
-        paging: paginated.paging,
-        query: query
+        query: query,
+        movies: paginated.content,
+        paging: {
+          number: paginated.number,
+          size: paginated.size,
+          totalPages: paginated.totalPages,
+          totalElements: paginated.totalElements,
+          last: paginated.last,
+          first: paginated.first,
+        },
       })
     )
   };
 
-  handleItemClick = (m) => {
+  handleMovieClick = (m) => {
     this.props.history.push(`/movie/${m.id}`)
   };
 
@@ -50,16 +57,24 @@ class SearchComponent extends React.Component {
 
   render = () => (
     <div>
-      <MovieGridComponent movies={this.state.movies}
-                          onItemClick={this.handleItemClick}/>
-      <Grid>
-        <Row id={'pagination-container'}>
-          {this.state.movies.length > 0 && (
+      <MovieGridComponent movies={this.state.movies} onItemClick={this.handleMovieClick}/>
+      {this.state.movies.length > 0 && (
+        <Grid>
+          <Row id={'pagination-container'}>
             <PagingComponent paging={this.state.paging}
                              onPageClick={this.paginationPageClick}/>
-          )}
-        </Row>
-      </Grid>
+          </Row>
+        </Grid>
+      )}
+      {this.state.movies.length === 0 && (
+        <Grid>
+          <Row>
+            <Col>
+              <h2>Loading...</h2>
+            </Col>
+          </Row>
+        </Grid>
+      )}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import movieService from '../service/MovieService'
-import MovieGridComponent from "./MovieGridComponent";
+import MovieGridComponent from "./commons/MovieGridComponent";
 import queryString from '../utils/query-string';
 import {Col, Grid, Row} from "react-bootstrap";
 import PagingComponent from "./PagingComponent";

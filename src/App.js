@@ -17,7 +17,7 @@ class App extends Component {
         <HashRouter>
           <div>
             <Route path={'/'} render={(props) => <NavBar {...props} />}/>
-            <div style={{paddingTop: 70}}>
+            <div id={'main-content'}>
               <Switch>
                 <Route path={'/home/page/:page'} component={HomeComponent}/>
                 <Route path={'/random'} component={RandomComponent}/>

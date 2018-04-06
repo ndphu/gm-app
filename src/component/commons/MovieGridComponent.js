@@ -16,17 +16,14 @@ class MovieGridComponent extends React.Component {
   };
 
   render = () => (
-    <Grid>
-      <Row>
-        {this.state.movies.map((m) => (
-          <Col xs={6} sm={4} md={3} lg={2} key={`movie-item-${m.id}`}>
-            <MovieCard
-              movie={m}
-              onClick={() => this.props.onItemClick(m)}/>
-          </Col>
-        ))}
-      </Row>
-    </Grid>
+    <div className={'grid-wrapper'}>
+      {this.state.movies.map((m) => (
+        <MovieCard
+          key={`movie-item-${m.id}`}
+          movie={m}
+          onClick={() => this.props.onItemClick(m)}/>
+      ))}
+    </div>
   )
 }
 

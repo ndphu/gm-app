@@ -1,29 +1,71 @@
-.navbar {
-  border-radius: 0 !important;
+#root {
+    background-color: #eeeeee;
 }
 
 .text-field-quick-search input {
-  color: #9d9d9d !important;
-  font-size: 14px !important;
-  padding-bottom: 2px!important;
+    color: #9d9d9d !important;
+    font-size: 14px !important;
+    padding-bottom: 2px !important;
 }
+
 .text-field-quick-search div {
-  color: #616161 !important;
-  font-size: 14px !important;
-  bottom: 7px !important;
+    color: #616161 !important;
+    font-size: 14px !important;
+    bottom: 7px !important;
 }
 
 #movie-component-paper-row {
-  margin-top: -28px !important;
-  margin-bottom: 15px !important;
+    margin-top: -28px !important;
+    margin-bottom: 15px !important;
 }
 
 #pagination-container {
-  text-align: center!important;
+    text-align: center !important;
 }
 
 #navbar-material {
-  box-sizing: border-box!important;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px!important;
-  //font-weight: normal;
+    box-sizing: border-box !important;
+    margin-left: -1px !important;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px !important;
+}
+
+.paragraph-end {
+    background-clip: border-box;
+    background: rgba(0, 0, 0, 0) linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255)) scroll;
+    background-origin: padding-box;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto;
+    bottom: 0px;
+    color: rgb(33, 33, 33);
+    cursor: pointer;
+    display: block;
+    filter: none;
+    font-family: Roboto, UILanguageFont, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    /*height: 18px;*/
+    top: 0px;
+    line-height: 18px;
+    max-height: 100%;
+    position: absolute;
+    right: 0px;
+    text-align: left;
+    text-rendering: optimizeLegibility;
+    white-space: nowrap;
+    width: 60px;
+}
+
+#main-content {
+    padding-top: 60px;
+}
+
+.grid-wrapper {
+    padding-left: 8px;
+    padding-right: 8px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 160px);
+    grid-gap: 8px;
+    align-items: center;
+    justify-content: center;
 }

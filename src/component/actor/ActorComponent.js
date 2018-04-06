@@ -1,7 +1,7 @@
 import React from 'react';
 import movieService from '../../service/MovieService';
 import {Col, Grid, Row} from 'react-bootstrap';
-import MovieGridComponent from "../MovieGridComponent";
+import MovieGridComponent from "../commons/MovieGridComponent";
 import PagingComponent from "../PagingComponent";
 
 class ActorComponent extends React.Component {

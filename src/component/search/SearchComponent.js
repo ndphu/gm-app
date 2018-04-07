@@ -1,40 +1,41 @@
 import React from 'react';
-import movieService from '../../service/MovieService';
+import movieService from '../../service/MovieService'
 import MovieGridComponent from "../commons/MovieGridComponent";
+import queryString from '../../utils/query-string';
 import PagingComponent from "../commons/PagingComponent";
 import actions from '../../actions/Actions';
 import {loader} from '../commons/GlobalLoaderBar';
 
-class ActorComponent extends React.Component {
+class SearchComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      query: '',
       movies: [],
       pageSize: 60,
-    };
-    this.handleItemClick.bind(this);
-    this.paginationPageClick.bind(this);
-    this.retrieveMovies.bind(this);
+    }
   }
 
   componentDidMount = () => {
-    this.retrieveMovies(this.props.match.params.actorKey, this.props.match.params.page - 1);
+    this.performSearch(this.props.match.params.page - 1, queryString.parse(this.props.location.search).q);
   };
 
   componentWillReceiveProps = (nextProps) => {
-    if (nextProps.match.params.page !== this.props.match.params.page
-      || nextProps.match.params.actorKey !== this.props.match.params.actorKey) {
-      this.retrieveMovies(nextProps.match.params.actorKey, nextProps.match.params.page - 1);
+    const nextQuery = queryString.parse(nextProps.location.search).q;
+    const nextPage = nextProps.match.params.page;
+    if (nextQuery !== this.state.query || nextPage !== this.props.match.params.page) {
+      this.performSearch(nextPage - 1, nextQuery);
     }
   };
 
-  retrieveMovies = (actorKey, page) => {
+  performSearch = (page, query) => {
     loader.start();
     this.setState({
       movies: []
     });
-    movieService.getMoviesByActor(actorKey, page, this.state.pageSize).then(paginated => {
+    movieService.searchByTitle(query, page, this.state.pageSize).then(paginated => {
         this.setState({
+          query: query,
           movies: paginated.content,
           paging: {
             number: paginated.number,
@@ -58,13 +59,11 @@ class ActorComponent extends React.Component {
       case actions.categoryClick:
         this.props.history.push(`/category/${data.key}/page/1`);
         break;
-      default:
-        break;
     }
   };
 
-  paginationPageClick = (page) => {
-    this.props.history.push(`/actor/${this.props.match.params.page}/page/${page}`);
+  paginationPageClick = (p) => {
+    this.props.history.push(`/search/page/${p}?q=${this.state.query}`)
   };
 
   render = () => (
@@ -76,7 +75,6 @@ class ActorComponent extends React.Component {
       )}
     </div>
   )
-
 }
 
-export default ActorComponent;
+export default SearchComponent;

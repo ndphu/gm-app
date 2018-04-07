@@ -1,6 +1,5 @@
 import 'whatwg-fetch';
 import config from '../config/Config.js';
-
 const jwtDecode = require('jwt-decode');
 
 class Api {

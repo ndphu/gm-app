@@ -37,14 +37,6 @@ const appStyle = {
     paddingLeft: 4,
     paddingRight: 8,
   },
-  videoPlayerWrapper: {
-    paddingLeft: 8,
-    paddingRight: 8,
-  },
-  videoPlayer: {
-    maxWidth: '100%',
-    height: 'auto',
-  },
   moviePoster: {
     maxWidth: '100%',
   }

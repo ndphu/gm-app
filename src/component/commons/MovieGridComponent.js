@@ -1,7 +1,5 @@
 import React from "react";
-import {Col, Grid, Row} from "react-bootstrap";
 import MovieCard from "./MovieCard";
-
 
 class MovieGridComponent extends React.Component {
   constructor(props) {
@@ -10,7 +8,6 @@ class MovieGridComponent extends React.Component {
       movies: [],
     }
   }
-
   componentWillReceiveProps = (nextProps) => {
     this.setState({movies: nextProps.movies});
   };
@@ -21,7 +18,8 @@ class MovieGridComponent extends React.Component {
         <MovieCard
           key={`movie-item-${m.id}`}
           movie={m}
-          onClick={() => this.props.onItemClick(m)}/>
+          onClick={this.props.onItemClick}
+        />
       ))}
     </div>
   )

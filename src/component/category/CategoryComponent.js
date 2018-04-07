@@ -1,18 +1,20 @@
 import React from 'react';
 import movieService from '../../service/MovieService';
-import {Col, Grid, Row} from 'react-bootstrap';
 import MovieGridComponent from "../commons/MovieGridComponent";
-import PagingComponent from "../PagingComponent";
+import actions from '../../actions/Actions';
+import PagingComponent from '../commons/PagingComponent';
+import {loader} from '../commons/GlobalLoaderBar';
 
 class CategoryComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       movies: [],
-      pageSize: 24,
+      pageSize: 60,
+      paging: {},
       categories: [],
     };
-    this.handleMovieClick.bind(this);
+    this.handleItemClick.bind(this);
     this.paginationPageClick.bind(this);
     this.retrieveMovies.bind(this);
   }
@@ -29,26 +31,38 @@ class CategoryComponent extends React.Component {
   };
 
   retrieveMovies = (categoryKey, page) => {
+    loader.start();
     this.setState({
       movies: []
     });
-    movieService.getMoviesByCategory(categoryKey, page, this.state.pageSize).then(paginated =>
-      this.setState({
-        movies: paginated.content,
-        paging: {
-          number: paginated.number,
-          size: paginated.size,
-          totalPages: paginated.totalPages,
-          totalElements: paginated.totalElements,
-          last: paginated.last,
-          first: paginated.first,
-        },
-      })
+    movieService.getMoviesByCategory(categoryKey, page, this.state.pageSize).then(paginated => {
+        this.setState({
+          movies: paginated.content,
+          paging: {
+            number: paginated.number,
+            size: paginated.size,
+            totalPages: paginated.totalPages,
+            totalElements: paginated.totalElements,
+            last: paginated.last,
+            first: paginated.first,
+          },
+        });
+        loader.finish();
+      }
     )
   };
 
-  handleMovieClick = (m) => {
-    this.props.history.push(`/movie/${m.id}`)
+  handleItemClick = (action, data) => {
+    switch (action) {
+      case actions.movieClick:
+        this.props.history.push(`/movie/${data.id}`);
+        break;
+      case actions.categoryClick:
+        this.props.history.push(`/category/${data.key}/page/1`);
+        break;
+      default:
+        break;
+    }
   };
 
   paginationPageClick = (page) => {
@@ -56,24 +70,12 @@ class CategoryComponent extends React.Component {
   };
 
   render = () => (
-    <div>
-      <MovieGridComponent movies={this.state.movies} onItemClick={this.handleMovieClick}/>
+    <div id={'category-page-content-grid'}>
+      <MovieGridComponent movies={this.state.movies}
+                          onItemClick={this.handleItemClick}/>
       {this.state.movies.length > 0 && (
-        <Grid>
-          <Row id={'pagination-container'}>
-            <PagingComponent paging={this.state.paging}
-                             onPageClick={this.paginationPageClick}/>
-          </Row>
-        </Grid>
-      )}
-      {this.state.movies.length === 0 && (
-        <Grid>
-          <Row>
-            <Col>
-              <h2>Loading...</h2>
-            </Col>
-          </Row>
-        </Grid>
+        <PagingComponent paging={this.state.paging}
+                         onPageClick={this.paginationPageClick}/>
       )}
     </div>
   )

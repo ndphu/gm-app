@@ -71,9 +71,7 @@ class NavBar extends React.Component {
       return this.state.currentCategory.title;
     } else if (this.props.location.pathname.startsWith('/category') && this.state.categories.length > 0) {
       const catKey = this.props.location.pathname.split('/category/')[1].split('/')[0];
-      console.log(catKey);
       const currentCategory = this.state.categories.filter(cat => cat.key === catKey)[0];
-      console.log(currentCategory);
       return currentCategory.title
     }
     return '';
@@ -101,6 +99,7 @@ class NavBar extends React.Component {
           <Route path={'/movie'} render={() => <Navbar.Brand>Xem Phim</Navbar.Brand>}/>
           <Route path={'/search'} render={() => <Navbar.Brand>Tìm Kiếm</Navbar.Brand>}/>
           <Route path={'/actor'} render={() => <Navbar.Brand>Diễn Viên</Navbar.Brand>}/>
+          <Route path={'/serie'} render={() => <Navbar.Brand>Phim Bộ</Navbar.Brand>}/>
           <Route path={'/category/:categoryKey/page/:page'} render={() => {
             const catKey = this.getCurrentCategoryKey();
             const current = this.state.categories.filter(cat => cat.key === catKey)[0];
@@ -115,6 +114,9 @@ class NavBar extends React.Component {
           <Nav>
             <LinkContainer to={'/home'}>
               <NavItem eventKey={1}>Trang Chủ</NavItem>
+            </LinkContainer>
+            <LinkContainer to={'/serie'}>
+              <NavItem eventKey={2}>Phim Bộ</NavItem>
             </LinkContainer>
             <NavItem eventKey={5} onClick={this.handleToggle}>Chọn Thể Loại</NavItem>
           </Nav>

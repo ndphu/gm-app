@@ -8,11 +8,11 @@ class MovieService {
   };
 
   getMoviesByActor = (actoryKey, page, size) => {
-    return api.get(`/search/byActorKey?key=${actoryKey}&page=${page}&size=${size}`)
+    return api.get(`/search/movie/byActorKey?key=${actoryKey}&page=${page}&size=${size}`)
   };
 
   getMoviesByCategory = (categoryKey, page, size) => {
-    return api.get(`/search/byCategoryKey?key=${categoryKey}&page=${page}&size=${size}`)
+    return api.get(`/search/movie/byCategoryKey?key=${categoryKey}&page=${page}&size=${size}`)
   };
 
   getMovie = (movieId) => {
@@ -20,7 +20,7 @@ class MovieService {
   };
 
   searchByTitle = (q, page, size) => {
-    return api.get(`/search/byTitle?query=${q}&page=${page}&size=${size}`)
+    return api.get(`/search/movie/byTitle?query=${q}&page=${page}&size=${size}`)
   };
 
   setCurrentMovie = (m) => {

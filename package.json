@@ -2,7 +2,7 @@
   "name": "gm-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gm-app-a9ccc.firebaseapp.com",
+  "homepage": "https://gm.cfapps.io",
   "dependencies": {
     "react": "^16.3.0",
     "react-dom": "^16.3.0",

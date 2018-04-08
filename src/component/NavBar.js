@@ -2,7 +2,6 @@ import React from "react";
 import {Nav, Navbar, NavItem} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import {Drawer, MenuItem as MaterialUIMenuItem, TextField} from "material-ui";
-import {grey500, grey200} from "material-ui/styles/colors";
 import categoryService from '../service/CategoryService';
 import {Route} from 'react-router-dom';
 
@@ -101,6 +100,7 @@ class NavBar extends React.Component {
           <Route path={'/home'} render={() => <Navbar.Brand>Trang Chủ</Navbar.Brand>}/>
           <Route path={'/movie'} render={() => <Navbar.Brand>Xem Phim</Navbar.Brand>}/>
           <Route path={'/search'} render={() => <Navbar.Brand>Tìm Kiếm</Navbar.Brand>}/>
+          <Route path={'/actor'} render={() => <Navbar.Brand>Diễn Viên</Navbar.Brand>}/>
           <Route path={'/category/:categoryKey/page/:page'} render={() => {
             const catKey = this.getCurrentCategoryKey();
             const current = this.state.categories.filter(cat => cat.key === catKey)[0];

@@ -13,6 +13,7 @@ class SearchComponent extends React.Component {
       query: '',
       movies: [],
       pageSize: 60,
+      notFound: false,
     }
   }
 
@@ -31,7 +32,8 @@ class SearchComponent extends React.Component {
   performSearch = (page, query) => {
     loader.start();
     this.setState({
-      movies: []
+      movies: [],
+      notFound: false,
     });
     movieService.searchByTitle(query, page, this.state.pageSize).then(paginated => {
         this.setState({
@@ -45,6 +47,8 @@ class SearchComponent extends React.Component {
             last: paginated.last,
             first: paginated.first,
           },
+          searching: false,
+          notFound: paginated.content.length === 0
         });
         loader.finish();
       }
@@ -70,8 +74,15 @@ class SearchComponent extends React.Component {
     <div>
       <MovieGridComponent movies={this.state.movies} onItemClick={this.handleItemClick}/>
       {this.state.movies.length > 0 && (
-        <PagingComponent paging={this.state.paging}
-                         onPageClick={this.paginationPageClick}/>
+        <div>
+          <PagingComponent paging={this.state.paging}
+                           onPageClick={this.paginationPageClick}/>
+        </div>
+      )}
+      {this.state.notFound && (
+        <div className={['search-not-found-message']}>
+          <h4>Không tìm thấy phim liên quan đến <span>{this.state.query}</span>. Vui lòng thử với từ khóa khác.</h4>
+        </div>
       )}
     </div>
   )

@@ -67,7 +67,8 @@ class WatchComponent extends React.Component {
       {this.state.movie &&
       <Paper zDepth={1} rounded={false} id={'movie-paper-container'}>
         <Player
-          playsInline
+          playsInline={false}
+          fluid={true}
           preload={'auto'}
           poster={this.state.movie.bigPoster}
           src={this.state.movie.videoSource}>
@@ -84,34 +85,29 @@ class WatchComponent extends React.Component {
           {this.state.movie.content}
         </div>
         <Divider className={'movie-divider'}/>
-        <div id={'movie-content'}>
-          <div className={['grid-wrapper-2-cols']}>
-            <div>
-              <h4>Diễn Viên</h4>
-              {this.state.movie.actors.map((a, i) => (
-                <span key={'film-details-actor-' + a.key}>
+        <div id={'movie-content'} className={['grid-wrapper-2-cols']}>
+          <div>
+            <h4>Diễn Viên</h4>
+            {this.state.movie.actors.map((a, i) => (
+              <span key={'film-details-actor-' + a.key}>
                 <a onClick={() => this.handleActorClick(a)}
                    style={{color: '#0645AD'}}>{a.title}</a>
-                  {i !== this.state.movie.actors.length - 1 ? ', ' : ''}
+                {i !== this.state.movie.actors.length - 1 ? ', ' : ''}
                 </span>
-              ))}
-            </div>
-            <div>
-              <h4>Thể Loại</h4>
-              {this.state.movie.categories.map((c, i) => (
-                <span key={'film-details-category-' + c.key}>
+            ))}
+          </div>
+          <div>
+            <h4>Thể Loại</h4>
+            {this.state.movie.categories.map((c, i) => (
+              <span key={'film-details-category-' + c.key}>
                 <a onClick={() => this.handleCategoryClick(c)}
                    style={{color: '#0645AD'}}>{c.title}</a>
-                  {i !== this.state.movie.categories.length - 1 ? ', ' : ''}
+                {i !== this.state.movie.categories.length - 1 ? ', ' : ''}
                 </span>
-              ))
-              }
-
-            </div>
+            ))
+            }
           </div>
-
         </div>
-
       </Paper>
       }
     </div>

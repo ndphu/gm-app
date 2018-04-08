@@ -19,6 +19,7 @@ class NavBar extends React.Component {
   }
 
   onQuickSearchKeyPress = (e) => {
+    e.target.setAttribute('maxlength', 32);
     const query = e.target.value.trim();
     if (e.key === 'Enter' && query) {
       this.props.history.push(`/search/page/1?q=${query}`)
@@ -110,15 +111,6 @@ class NavBar extends React.Component {
               this.onQuickSearchKeyPress(e)
             }}/>
           </Navbar.Form>
-          <Nav pullRight>
-            <NavDropdown eventKey={4} title="More" id="basic-nav-dropdown">
-              <MenuItem eventKey={4.1}>Profile</MenuItem>
-              <MenuItem eventKey={4.2}>History</MenuItem>
-              <MenuItem eventKey={4.3}>Preferences</MenuItem>
-              <MenuItem divider/>
-              <MenuItem eventKey={4.5}>Logout</MenuItem>
-            </NavDropdown>
-          </Nav>
         </Navbar.Collapse>
       </Navbar>
     </div>

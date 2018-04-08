@@ -2,20 +2,21 @@
   "name": "gm-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://19november.freeddns.org:8080/gm",
+  "homepage": "https://gm.cfapps.io",
   "dependencies": {
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-scripts": "1.1.1",
     "material-ui": "latest",
     "react-router": "latest",
-    "redux": "latest",
-    "react-redux": "latest",
     "react-router-dom": "latest",
     "jwt-decode": "latest",
     "whatwg-fetch": "latest",
     "react-bootstrap": "latest",
-    "react-router-bootstrap": "latest"
+    "react-router-bootstrap": "latest",
+    "nanobar": "latest",
+    "video-react": "latest",
+    "redux": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

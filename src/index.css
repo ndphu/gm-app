@@ -1,29 +1,221 @@
-.navbar {
-  border-radius: 0 !important;
+body {
+  background-color: #eeeeee!important;
+  margin: 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif !important;
 }
 
 .text-field-quick-search input {
+  font-size: 14px !important;
+  padding-bottom: 2px !important;
+}
+
+.text-field-quick-search div {
   color: #9d9d9d !important;
   font-size: 14px !important;
-  padding-bottom: 2px!important;
-}
-.text-field-quick-search div {
-  color: #616161 !important;
-  font-size: 14px !important;
-  bottom: 7px !important;
-}
-
-#movie-component-paper-row {
-  margin-top: -28px !important;
-  margin-bottom: 15px !important;
-}
-
-#pagination-container {
-  text-align: center!important;
+  bottom: 5px !important;
 }
 
 #navbar-material {
-  box-sizing: border-box!important;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px!important;
-  //font-weight: normal;
+  box-sizing: border-box !important;
+  margin-left: -1px !important;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 8px, rgba(0, 0, 0, 0.12) 0px 2px 4px !important;
+}
+
+.cardview-movie-poster {
+  max-width: 160px;
+  max-height: 245px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cardview-movie-poster img {
+  min-width: 160px;
+  max-width: 100%;
+  min-height: 245px;
+  max-height: 100%;
+}
+
+.cardview-movie-poster .preview-overlay-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  /*animation*/
+  -webkit-transition: 0.45s;
+  -moz-transition: 0.45s;
+  -o-transition: 0.45s;
+  transition: 0.45s;
+}
+
+.cardview-movie-poster .preview-overlay-container.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cardview-movie-poster .preview-overlay-container .quick-play {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+}
+
+.cardview-movie-poster .preview-overlay-container .quick-play button {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.cardview-movie-poster .preview-overlay-container .quick-play svg {
+  width: 40px !important;
+  background-color: transparent !important;
+}
+
+.cardview-movie-poster .preview-overlay-container .click-handler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#pagination-container {
+  text-align: center !important;
+}
+
+.paragraph-end {
+  background-clip: border-box;
+  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255)) scroll;
+  background-origin: padding-box;
+  background-position-x: 0;
+  background-position-y: 0;
+  background-size: auto;
+  bottom: 0;
+  color: rgb(33, 33, 33);
+  cursor: pointer;
+  display: block;
+  filter: none;
+  font-family: Roboto, UILanguageFont, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  /*height: 18px;*/
+  top: 0px;
+  line-height: 18px;
+  max-height: 100%;
+  position: absolute;
+  right: 0px;
+  text-align: left;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  width: 60px;
+}
+
+#main-content {
+  padding-top: 60px;
+}
+
+.grid-wrapper {
+  margin-top: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 160px);
+  grid-gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+#progressbar-indicator .bar {
+  width: 0;
+  height: 3px;
+  transition: height .5s;
+  background: teal;
+}
+
+.video-react {
+  font-size: 14px!important;
+}
+
+.video-react-control-bar {
+  font-family: Roboto, UILanguageFont, Arial, sans-serif;
+}
+
+.paging-container {
+  text-align: center !important;
+  margin-left: 8px;
+}
+
+.movie-component-header-container {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  height: 80px;
+}
+
+.movie-component-header-title {
+  position: absolute;
+  left: 80px;
+  right: 0;
+  top: 0;
+}
+
+.movie-component-header-close-button {
+  position: absolute;
+  left: 8px;
+  top: 10px;
+}
+
+.page-container {
+  width: 100%;
+  text-align: center;
+}
+
+#movie-paper-container {
+  max-width: 720px;
+  width: 100%;
+  display: inline-block;
+  text-align: left;
+  margin: 8px 0px;
+}
+
+#movie-title {
+  padding: 8px 16px;
+  font-weight: 400;
+}
+
+#movie-button-container > * {
+  margin: 0px 0px 0px 16px ;
+}
+
+.movie-divider {
+  margin: 30px 24px!important;
+  position: relative;
+}
+
+#movie-content {
+  margin: 30px 0px;
+  padding: 0px 50px;
+}
+
+#movie-content h4 {
+  font-weight: 400;
+}
+
+#movie-content a {
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.grid-wrapper-2-cols {
+  display: grid;
+  /*grid: auto-flow dense / 310px 310px;*/
+  grid-template-columns: repeat(auto-fill, 310px);
+}
+.search-not-found-message {
+  padding: 16px;
+  font-weight: 400;
+}
+
+.search-not-found-message span {
+  color: crimson;
 }

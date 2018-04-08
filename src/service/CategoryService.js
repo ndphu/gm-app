@@ -4,7 +4,7 @@ class CategoryService {
   currentMovie;
 
   getCategories = () => {
-    return api.get(`/category`)
+    return api.get(`/category?page=${0}&size=${50}`)
   };
 }
 

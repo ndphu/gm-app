@@ -1,0 +1,6 @@
+---
+applications:
+- name: gm-app
+  memory: 64M
+  instances: 1
+  random-route: true

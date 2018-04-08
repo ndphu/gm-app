@@ -67,7 +67,7 @@ class WatchComponent extends React.Component {
       {this.state.movie &&
       <Paper zDepth={1} rounded={false} id={'movie-paper-container'}>
         <Player
-          playsInline={false}
+          playsInline={true}
           fluid={true}
           preload={'auto'}
           poster={this.state.movie.bigPoster}

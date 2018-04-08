@@ -1,9 +1,10 @@
 import React from "react";
-import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from "react-bootstrap";
+import {Nav, Navbar, NavItem} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
-import {Drawer, TextField, MenuItem as MaterialUIMenuItem} from "material-ui";
-import {grey200, grey300} from "material-ui/styles/colors";
+import {Drawer, MenuItem as MaterialUIMenuItem, TextField} from "material-ui";
+import {grey500, grey200} from "material-ui/styles/colors";
 import categoryService from '../service/CategoryService';
+import {Route} from 'react-router-dom';
 
 
 class NavBar extends React.Component {
@@ -79,6 +80,10 @@ class NavBar extends React.Component {
     return '';
   };
 
+  getCurrentCategoryKey = () => {
+    return this.props.location.pathname.split('/category/')[1].split('/')[0];
+  };
+
   render = () => (
     <div>
       <Drawer
@@ -93,7 +98,17 @@ class NavBar extends React.Component {
       </Drawer>
       <Navbar collapseOnSelect fixedTop id={'navbar-material'}>
         <Navbar.Header>
-          <Navbar.Brand>{this.getCategoryText()}</Navbar.Brand>
+          <Route path={'/home'} render={() => <Navbar.Brand>Trang Chủ</Navbar.Brand>}/>
+          <Route path={'/movie'} render={() => <Navbar.Brand>Xem Phim</Navbar.Brand>}/>
+          <Route path={'/search'} render={() => <Navbar.Brand>Tìm Kiếm</Navbar.Brand>}/>
+          <Route path={'/category/:categoryKey/page/:page'} render={() => {
+            const catKey = this.getCurrentCategoryKey();
+            const current = this.state.categories.filter(cat => cat.key === catKey)[0];
+            if (current) {
+              return (<Navbar.Brand>{current.title}</Navbar.Brand>)
+            }
+            return <div/>
+          }}/>
           <Navbar.Toggle/>
         </Navbar.Header>
         <Navbar.Collapse>
@@ -105,8 +120,8 @@ class NavBar extends React.Component {
           </Nav>
           <Navbar.Form pullRight>
             <TextField className={'text-field-quick-search'} style={{maxHeight: 34}}
-                       underlineStyle={{borderColor: grey300}}
-                       underlineFocusStyle={{borderColor: grey200}}
+                       underlineStyle={{borderColor: '#008080'}}
+                       underlineFocusStyle={{borderColor: '#008080'}}
                        hintText='Quick Search' onKeyPress={(e) => {
               this.onQuickSearchKeyPress(e)
             }}/>

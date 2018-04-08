@@ -1,11 +1,10 @@
 body {
   background-color: #eeeeee!important;
   margin: 0;
-  font-family: Roboto, UILanguageFont, Arial, sans-serif!important;
+  font-family: Roboto, sans-serif !important;
 }
 
 .text-field-quick-search input {
-  color: #616161 !important;
   font-size: 14px !important;
   padding-bottom: 2px !important;
 }

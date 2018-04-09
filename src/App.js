@@ -12,6 +12,9 @@ import WatchSerieComponent from './component/serie/WatchSerieComponent';
 
 class App extends Component {
   componentDidMount = () => {
+    let loadScreen = document.getElementById('load-screen');
+    loadScreen.style.display  = 'none';
+    loadScreen.style.visibility  = 'hidden';
   };
   render() {
     return (

@@ -11,10 +11,6 @@ class MovieService {
     return api.get(`/search/movie/byActorKey?key=${actoryKey}&page=${page}&size=${size}`)
   };
 
-  getMoviesByCategory = (categoryKey, page, size) => {
-    return api.get(`/search/movie/byCategoryKey?key=${categoryKey}&page=${page}&size=${size}`)
-  };
-
   getMovie = (movieId) => {
     return api.get(`/movie/${movieId}`)
   };

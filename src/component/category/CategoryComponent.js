@@ -1,5 +1,6 @@
 import React from 'react';
 import movieService from '../../service/MovieService';
+import categoryService from '../../service/CategoryService';
 import MovieGridComponent from "../commons/MovieGridComponent";
 import actions from '../../actions/Actions';
 import PagingComponent from '../commons/PagingComponent';
@@ -20,13 +21,13 @@ class CategoryComponent extends React.Component {
   }
 
   componentDidMount = () => {
-    this.retrieveMovies(this.props.match.params.categoryKey, this.props.match.params.page - 1);
+    this.retrieveMovies(this.props.match.params.categoryKey, this.props.match.params.page);
   };
 
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.match.params.page !== this.props.match.params.page
       || nextProps.match.params.categoryKey !== this.props.match.params.categoryKey) {
-      this.retrieveMovies(nextProps.match.params.categoryKey, nextProps.match.params.page - 1);
+      this.retrieveMovies(nextProps.match.params.categoryKey, nextProps.match.params.page);
     }
   };
 
@@ -35,16 +36,15 @@ class CategoryComponent extends React.Component {
     this.setState({
       movies: []
     });
-    movieService.getMoviesByCategory(categoryKey, page, this.state.pageSize).then(paginated => {
+    const category = categoryService.getCategoryByKey(categoryKey);
+    categoryService.getMoviesByCategory(category, page, this.state.pageSize).then(resp => {
         this.setState({
-          movies: paginated.content,
+          movies: resp.docs,
           paging: {
-            number: paginated.number,
-            size: paginated.size,
-            totalPages: paginated.totalPages,
-            totalElements: paginated.totalElements,
-            last: paginated.last,
-            first: paginated.first,
+            number: resp.page,
+            size: resp.limit,
+            totalPages: resp.totalPages,
+            totalElements: resp.total
           },
         });
         loader.finish();

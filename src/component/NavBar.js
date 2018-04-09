@@ -12,7 +12,7 @@ class NavBar extends React.Component {
     this.onQuickSearchKeyPress.bind(this);
     this.state = {
       open: false,
-      categories: [],
+      categories: categoryService.getCategories(),
       currentCategory: {},
     };
     this.onMenuItemClick.bind(this);
@@ -24,10 +24,6 @@ class NavBar extends React.Component {
     if (e.key === 'Enter' && query) {
       this.props.history.push(`/search/page/1?q=${query}`)
     }
-  };
-
-  componentDidMount = () => {
-    this.retrieveCategories();
   };
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -47,18 +43,9 @@ class NavBar extends React.Component {
   retrieveCategories = () => {
     if (this.state.categories.length === 0) {
       categoryService.getCategories().then(categories => {
-        categories.content.sort(function (c1, c2) {
-          if (c1.key < c2.key) {
-            return -1;
-          } else if (c1.key > c2.key) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
         this.setState({
-          categories: categories.content,
-          currentCategory: categories.content.filter(cat => cat.key === this.props.match.params.categoryKey)[0],
+          categories: categories,
+          currentCategory: categoryService.getCategoryByKey(this.props.match.params.categoryKey),
         });
       });
     }

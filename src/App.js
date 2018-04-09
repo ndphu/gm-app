@@ -10,36 +10,56 @@ import ActorPage from './component/actor/ActorPage';
 import SeriePage from './component/serie/SeriePage';
 import WatchSerieComponent from './component/serie/WatchSerieComponent';
 
+import categoryService from './service/CategoryService';
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ready: false,
+    }
+  }
+
   componentDidMount = () => {
-    let loadScreen = document.getElementById('load-screen');
-    loadScreen.style.display  = 'none';
-    loadScreen.style.visibility  = 'hidden';
+    categoryService.fetchCategory().then(resp => {
+      categoryService.setCategories(resp.docs);
+      let loadScreen = document.getElementById('load-screen');
+      loadScreen.style.display = 'none';
+      loadScreen.style.visibility = 'hidden';
+      this.setState({
+        ready: true,
+      })
+    });
+
   };
+
   render() {
     return (
-      <MuiThemeProvider>
-        <HashRouter>
-          <div>
-            <Route path={'/'} render={(props) => <NavBar {...props} />}/>
-            <div id={'nano-bar-indicator'}/>
-            <div id={'main-content'}>
-              <Switch>
-                <Route path={'/home/page/:page'} component={HomeComponent}/>
-                <Route path={'/search/page/:page'} component={SearchComponent}/>
-                <Route path={'/movie/:movieId'} component={MovieComponent}/>
-                <Route path={'/category'} component={CategoryPage}/>
-                <Route path={'/actor'} component={ActorPage}/>
-                <Route path={'/serie'} component={SeriePage}/>
-                <Route path={'/watch/serie/:serieId'} component={WatchSerieComponent}/>
-                <Redirect exact={true} from={'/'} to={'/home'}/>
-                <Redirect exact={true} from={'/home'} to={'/home/page'}/>
-                <Redirect exact={true} from={'/home/page'} to={'/home/page/1'}/>
-              </Switch>
+      <div>
+        {this.state.ready &&
+        <MuiThemeProvider>
+          <HashRouter>
+            <div>
+              <Route path={'/'} render={(props) => <NavBar {...props} />}/>
+              <div id={'nano-bar-indicator'}/>
+              <div id={'main-content'}>
+                <Switch>
+                  <Route path={'/home/page/:page'} component={HomeComponent}/>
+                  <Route path={'/search/page/:page'} component={SearchComponent}/>
+                  <Route path={'/movie/:movieId'} component={MovieComponent}/>
+                  <Route path={'/category'} component={CategoryPage}/>
+                  <Route path={'/actor'} component={ActorPage}/>
+                  <Route path={'/serie'} component={SeriePage}/>
+                  <Route path={'/watch/serie/:serieId'} component={WatchSerieComponent}/>
+                  <Redirect exact={true} from={'/'} to={'/home'}/>
+                  <Redirect exact={true} from={'/home'} to={'/home/page'}/>
+                  <Redirect exact={true} from={'/home/page'} to={'/home/page/1'}/>
+                </Switch>
+              </div>
             </div>
-          </div>
-        </HashRouter>
-      </MuiThemeProvider>
+          </HashRouter>
+        </MuiThemeProvider>}
+      </div>
     );
   }
 }

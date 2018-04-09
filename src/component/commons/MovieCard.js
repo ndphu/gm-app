@@ -6,6 +6,7 @@ import {red200} from "material-ui/styles/colors";
 import actions from '../../actions/Actions'
 import PlayCircleOutline from 'material-ui/svg-icons/av/play-circle-outline'
 import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import categoryService from '../../service/CategoryService';
 
 const coverWidth = 160;
 const coverHeight = 245;
@@ -77,11 +78,12 @@ class MovieCard extends React.Component {
   }
 
   handleMovieClick = () => {
-    this.props.onClick(actions.movieClick, this.props.movie)
+    this.props.onClick(actions.movieClick, this.props.movie);
   };
 
   handleCategoryClick = () => {
-    this.props.onClick(actions.categoryClick, this.props.movie.category)
+    this.props.onClick(actions.categoryClick,
+      categoryService.getCategoryByTitle(this.props.movie.categories[0]));
   };
 
   onMouseEnter = () => {
@@ -96,10 +98,10 @@ class MovieCard extends React.Component {
     });
   };
 
-  getTooltip = (m) => {
+  getTooltip = (mesg) => {
     return (
       <Tooltip id="tooltip">
-        <strong>{m.title}</strong>
+        <strong>{mesg}</strong>
       </Tooltip>
     );
   };
@@ -121,14 +123,16 @@ class MovieCard extends React.Component {
         </div>
       </div>
       <div style={style.details}>
-        <OverlayTrigger placement="bottom" overlay={this.getTooltip(this.props.movie)}>
+        <OverlayTrigger placement="bottom" overlay={this.getTooltip(this.props.movie.title)}>
           <a style={style.title} onClick={this.handleMovieClick}>{this.props.movie.title}
             <span style={style.paragraphEnd} className={'paragraph-end'}/>
           </a>
         </OverlayTrigger>
-        <a style={style.subTitle} onClick={this.handleCategoryClick}>{this.props.movie.category.title}
-          <span style={style.paragraphEnd} className={'paragraph-end'}/>
-        </a>
+        <OverlayTrigger placement="bottom" overlay={this.getTooltip(this.props.movie.categories.join(','))}>
+          <a style={style.subTitle} onClick={this.handleCategoryClick}>{this.props.movie.categories[0]}
+            <span style={style.paragraphEnd} className={'paragraph-end'}/>
+          </a>
+        </OverlayTrigger>
       </div>
       <div style={style.ratesAndViews}>
         <div style={{position: 'relative'}}>

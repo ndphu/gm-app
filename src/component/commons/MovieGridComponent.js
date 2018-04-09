@@ -16,7 +16,7 @@ class MovieGridComponent extends React.Component {
     <div className={'grid-wrapper'}>
       {this.state.movies.map((m) => (
         <MovieCard
-          key={`movie-item-${m.id}`}
+          key={`movie-item-${m._id}`}
           movie={m}
           onClick={this.props.onItemClick}
         />

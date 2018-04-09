@@ -36,10 +36,11 @@ class WatchSerieComponent extends React.Component {
 
   componentDidMount = () => {
     loader.start();
-    serieService.getSerieById(this.props.match.params.serieId).then(m => {
+    serieService.getSerieById(this.props.match.params.serieId).then(serie => {
       window.scrollTo(0, 0);
+      serie.episodes.sort((a, b) => a.order - b.order);
       this.setState({
-        serie: m
+        serie: serie
       });
       loader.finish();
     });

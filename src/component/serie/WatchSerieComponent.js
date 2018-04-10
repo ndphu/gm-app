@@ -4,6 +4,8 @@ import {Divider, List, ListItem, Paper, RaisedButton} from 'material-ui';
 import {loader} from '../commons/GlobalLoaderBar';
 import "../../../node_modules/video-react/dist/video-react.css";
 import {BigPlayButton, Player} from 'video-react';
+import navigatorService from '../../service/NavigatorService';
+import categoryService from '../../service/CategoryService';
 
 class WatchSerieComponent extends React.Component {
   constructor(props) {
@@ -24,11 +26,11 @@ class WatchSerieComponent extends React.Component {
   };
 
   handleCategoryClick = (c) => {
-    this.props.history.push(`/category/${c.key}/page/1`)
+    navigatorService.goToCategory(categoryService.getCategoryByTitle(c));
   };
 
   handleActorClick = (a) => {
-    this.props.history.push(`/actor/${a.key}/page/1`)
+    //TODO: navigatorService.goToActor(a);
   };
 
   handleDirectorClick = () => {
@@ -124,9 +126,9 @@ class WatchSerieComponent extends React.Component {
           <div>
             <h4>Diễn Viên</h4>
             {this.state.serie.actors.map((a, i) => (
-              <span key={'film-details-actor-' + a.key}>
+              <span key={'film-details-actor-' + a}>
                 <a onClick={() => this.handleActorClick(a)}
-                   style={{color: '#0645AD'}}>{a.title}</a>
+                   style={{color: '#0645AD'}}>{a}</a>
                 {i !== this.state.serie.actors.length - 1 ? ', ' : ''}
                 </span>
             ))}
@@ -134,9 +136,9 @@ class WatchSerieComponent extends React.Component {
           <div>
             <h4>Thể Loại</h4>
             {this.state.serie.categories.map((c, i) => (
-              <span key={'film-details-category-' + c.key}>
+              <span key={'film-details-category-' + c}>
                 <a onClick={() => this.handleCategoryClick(c)}
-                   style={{color: '#0645AD'}}>{c.title}</a>
+                   style={{color: '#0645AD'}}>{c}</a>
                 {i !== this.state.serie.categories.length - 1 ? ', ' : ''}
                 </span>
             ))

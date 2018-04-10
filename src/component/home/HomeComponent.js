@@ -1,4 +1,3 @@
-import {RaisedButton} from 'material-ui';
 import React from 'react';
 import actions from '../../actions/Actions';
 import homeService from '../../service/HomeService'

@@ -1,14 +1,6 @@
 import api from '../client/Api'
 
-const cacheKey = 'gm.cache.categories';
-
 class CategoryService {
-  constructor() {
-    if (localStorage.getItem(cacheKey)) {
-      this.categories = JSON.parse(localStorage.getItem(cacheKey));
-    }
-  }
-
   getCategoryByKey = (key) => {
     return this.categories.filter(category => category.key === key)[0];
   };
@@ -26,7 +18,6 @@ class CategoryService {
   };
 
   setCategories = (categories) => {
-    localStorage.setItem(cacheKey, JSON.stringify(categories));
     this.categories = categories;
   };
 

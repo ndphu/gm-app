@@ -1,9 +1,8 @@
 import React from "react";
 import {Nav, Navbar, NavItem} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
-import {Drawer, MenuItem as MaterialUIMenuItem, TextField} from "material-ui";
+import {Drawer, MenuItem as MaterialUIMenuItem} from "material-ui";
 import categoryService from '../service/CategoryService';
-import {Route} from 'react-router-dom';
 
 
 class NavBar extends React.Component {
@@ -89,12 +88,6 @@ class NavBar extends React.Component {
           <Nav>
             <LinkContainer to={'/home'}>
               <NavItem eventKey={1}>Trang Chủ</NavItem>
-            </LinkContainer>
-            <LinkContainer to={'/serie'}>
-              <NavItem eventKey={2}>Phim Bộ</NavItem>
-            </LinkContainer>
-            <LinkContainer to={'/search'}>
-              <NavItem eventKey={3}>Tìm Kiếm</NavItem>
             </LinkContainer>
             <NavItem eventKey={5} onClick={this.handleToggle}>Chọn Thể Loại</NavItem>
           </Nav>

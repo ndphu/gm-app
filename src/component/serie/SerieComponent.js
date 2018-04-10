@@ -2,7 +2,6 @@ import React from 'react';
 import serieService from '../../service/SerieService';
 import MovieGridComponent from '../commons/MovieGridComponent';
 import PagingComponent from '../commons/PagingComponent';
-import actions from '../../actions/Actions';
 import {loader} from '../commons/GlobalLoaderBar';
 
 class SeriesComponent extends React.Component {

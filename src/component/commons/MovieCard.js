@@ -3,7 +3,6 @@ import {Paper} from 'material-ui';
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import {red200} from "material-ui/styles/colors";
-import actions from '../../actions/Actions'
 import PlayCircleOutline from 'material-ui/svg-icons/av/play-circle-outline'
 import {OverlayTrigger, Tooltip} from 'react-bootstrap';
 import categoryService from '../../service/CategoryService';
@@ -146,7 +145,7 @@ class MovieCard extends React.Component {
             position: 'absolute',
             right: 0,
             display: 'inline-block'
-          }}>{this.props.movie.views + ' views'}</span>
+          }}>{(this.props.movie.views ? this.props.movie.views : 0) + ' views'}</span>
         </div>
       </div>
     </Paper>

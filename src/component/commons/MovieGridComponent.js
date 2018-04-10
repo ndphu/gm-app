@@ -2,10 +2,6 @@ import React from "react";
 import MovieCard from "./MovieCard";
 
 class MovieGridComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  
   render = () => (
     <div className={'grid-wrapper'}>
       {this.props.movies.map((m) => (

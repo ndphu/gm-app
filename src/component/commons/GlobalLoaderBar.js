@@ -1,5 +1,3 @@
-import Nanobar from 'nanobar';
-
 class GlobalLoaderBar {
   constructor() {
     this.loadScreen = document.getElementById('load-screen');

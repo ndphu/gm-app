@@ -1,8 +1,4 @@
 class NavigatorService {
-  constructor() {
-  
-  }
-  
   setHistory(history) {
     this.history = history;
   }
@@ -25,6 +21,15 @@ class NavigatorService {
   goToActor(actor) {
     this.history.push(`/actor/${actor.key}/page/1`)
   };
+
+  goToSearch(query) {
+    this.history.push(`/search/q/${query}`);
+
+  }
+
+  goToHome() {
+    this.history.push(`/home`);
+  }
 }
 
 const navigatorService = new NavigatorService();

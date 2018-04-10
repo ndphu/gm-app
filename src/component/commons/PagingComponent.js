@@ -21,7 +21,6 @@ class PagingComponent extends React.Component {
   };
 
   updateState = (paging) => {
-    console.log(paging);
     this.setState({
       paging: paging,
       prevPrev: paging.number-2,
@@ -38,7 +37,7 @@ class PagingComponent extends React.Component {
   render = () => {
     return (
       <div className={'paging-container'}>
-        {this.state.paging && (
+        {this.state.paging && this.state.paging.totalPages > 1 && (
           <Pagination>
             {this.state.paging.number !== 1 && (
               <Pagination.First onClick={() => this.props.onPageClick(1)}/>)}

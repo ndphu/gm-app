@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Phim Lậu Online</title>
+    <title>Phim Không Share</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -12,7 +12,18 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
+        #load-screen {
+            z-index: 99999;
+            position: fixed;
+            opacity: 0.85;
+            width: 100%;
+            height: 100%;
+            background-color: #212121;
+        }
         .loading-message {
             position: relative;
             width: 100%;
@@ -24,7 +35,7 @@
             width: 97px;
             height: 19px;
             position: absolute;
-            top: 70px;
+            top: 32px;
             left: 50%;
             transform: translate(-50%, -50%);
             -o-transform: translate(-50%, -50%);
@@ -184,6 +195,20 @@
             }
         }
     </style>
+    <script>
+      var WebFontConfig = {
+        google: {families: ['Roboto:400,300,500:latin']}
+      };
+      (function () {
+        var wf = document.createElement('script');
+        wf.src = ('https:' === document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
 </head>
 <body>
 <noscript>
@@ -197,25 +222,7 @@
         <div></div>
         <div></div>
     </div>
-    <h2 class="loading-message">Từ từ... đang load... đợi chút...</h2>
 </div>
 <div id="root"></div>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script>
-  var WebFontConfig = {
-    google: {families: ['Roboto:400,300,500:latin']}
-  };
-  (function () {
-    var wf = document.createElement('script');
-    wf.src = ('https:' === document.location.protocol ? 'https' : 'http') +
-      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'true';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
-  })();
-</script>
 </body>
 </html>

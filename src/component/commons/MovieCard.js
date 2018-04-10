@@ -7,6 +7,7 @@ import actions from '../../actions/Actions'
 import PlayCircleOutline from 'material-ui/svg-icons/av/play-circle-outline'
 import {OverlayTrigger, Tooltip} from 'react-bootstrap';
 import categoryService from '../../service/CategoryService';
+import navigatorService from '../../service/NavigatorService';
 
 const coverWidth = 160;
 const coverHeight = 245;
@@ -78,12 +79,11 @@ class MovieCard extends React.Component {
   }
 
   handleMovieClick = () => {
-    this.props.onClick(actions.movieClick, this.props.movie);
+    navigatorService.goToMovie(this.props.movie);
   };
 
   handleCategoryClick = () => {
-    this.props.onClick(actions.categoryClick,
-      categoryService.getCategoryByTitle(this.props.movie.categories[0]));
+    navigatorService.goToCategory(categoryService.getCategoryByTitle(this.props.movie.categories[0]));
   };
 
   onMouseEnter = () => {

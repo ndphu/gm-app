@@ -1,54 +1,47 @@
+import {RaisedButton} from 'material-ui';
 import React from 'react';
-import movieService from '../../service/MovieService';
-import MovieGridComponent from "../commons/MovieGridComponent";
 import actions from '../../actions/Actions';
-import PagingComponent from '../commons/PagingComponent';
+import homeService from '../../service/HomeService'
 import {loader} from '../commons/GlobalLoaderBar';
+import MovieGridComponent from '../commons/MovieGridComponent';
+import SectionHeader from '../commons/SectionHeader';
 
 class HomeComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [],
-      pageSize: 60,
+      sections: [],
     };
     this.handleItemClick.bind(this);
+    this.handleSectionHeaderClick.bind(this);
     this.paginationPageClick.bind(this);
-    this.retrieveMovies.bind(this);
   }
-
+  
   componentDidMount = () => {
-    this.retrieveMovies(this.props.match.params.page - 1);
+    this.retrieveHome();
   };
-
+  
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.match.params.page !== this.props.match.params.page) {
-      this.retrieveMovies(nextProps.match.params.page - 1);
+      this.retrieveHome();
     }
   };
-
-  retrieveMovies = (page) => {
+  
+  retrieveHome = () => {
     loader.start();
-
+    
     this.setState({
-      movies: []
+      sections: []
     });
-    movieService.getMovies(page, this.state.pageSize).then(paginated => {
-      loader.finish();
-      this.setState({
-        movies: paginated.content,
-        paging: {
-          number: paginated.number,
-          size: paginated.size,
-          totalPages: paginated.totalPages,
-          totalElements: paginated.totalElements,
-          last: paginated.last,
-          first: paginated.first,
-        },
-      })}
+    homeService.getHome().then(sections => {
+        loader.finish();
+        this.setState({
+          sections: sections,
+        })
+      }
     )
   };
-
+  
   handleItemClick = (action, data) => {
     switch (action) {
       case actions.movieClick:
@@ -61,22 +54,29 @@ class HomeComponent extends React.Component {
         break;
     }
   };
-
+  
+  handleSectionHeaderClick = (category) => {
+    this.props.history.push(`/category/${category.key}/page/1`);
+  };
+  
   paginationPageClick = (page) => {
     this.props.history.push(`/home/page/${page}`);
   };
-
+  
   render = () => (
     <div>
-      <MovieGridComponent movies={this.state.movies}
-                          onItemClick={this.handleItemClick}/>
-      {this.state.movies.length > 0 && (
-        <PagingComponent paging={this.state.paging}
-                         onPageClick={this.paginationPageClick}/>
-      )}
+      {this.state.sections.map(section => (
+        <div className={'section-container'} key={'home-section-' + section.category.key}>
+          <SectionHeader onClick={this.handleSectionHeaderClick} category={section.category}/>
+          <div className={'section-content'}>
+            <MovieGridComponent movies={section.movies}
+                                onItemClick={this.handleItemClick}/>
+          </div>
+        </div>
+      ))}
     </div>
   )
-
+  
 }
 
 export default HomeComponent;

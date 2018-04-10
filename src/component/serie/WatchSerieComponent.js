@@ -10,6 +10,7 @@ class WatchSerieComponent extends React.Component {
     super(props);
     this.state = {
       serie: null,
+      episode: null,
     };
     this.handleActorClick.bind(this);
     this.downloadVideo.bind(this);
@@ -36,11 +37,11 @@ class WatchSerieComponent extends React.Component {
 
   componentDidMount = () => {
     loader.start();
-    serieService.getSerieById(this.props.match.params.serieId).then(serie => {
+    serieService.getSerieById(this.props.match.params.serieId).then(response => {
       window.scrollTo(0, 0);
-      serie.episodes.sort((a, b) => a.order - b.order);
       this.setState({
-        serie: serie
+        serie: response.serie,
+        episodes: response.episodes,
       });
       loader.finish();
     });
@@ -97,7 +98,7 @@ class WatchSerieComponent extends React.Component {
         <h2 id={'movie-title'}>{this.state.episode ? this.state.episode.title : this.state.serie.title}</h2>
         <div className={['watch-episode-episode-list']}>
           <List>
-            {this.state.serie.episodes.map(e => {
+            {this.state.episodes.map(e => {
               return (
                 <ListItem
                   onClick={() => {

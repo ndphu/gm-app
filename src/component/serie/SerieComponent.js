@@ -54,19 +54,6 @@ class SeriesComponent extends React.Component {
     )
   };
   
-  handleItemClick = (action, data) => {
-    switch (action) {
-      case actions.movieClick:
-        this.props.history.push(`/watch/serie/${data.id}`);
-        break;
-      case actions.categoryClick:
-        this.props.history.push(`/category/${data.key}/page/1`);
-        break;
-      default:
-        break;
-    }
-  };
-  
   paginationPageClick = (page) => {
     this.props.history.push(`/serie/q/${this.props.match.q}/page/:${page}`);
   };

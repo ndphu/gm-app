@@ -7,8 +7,10 @@ import SearchComponent from "./component/search/SearchComponent";
 import MovieComponent from "./component/movie/MovieComponent";
 import CategoryPage from './component/category/CategoryPage';
 import ActorPage from './component/actor/ActorPage';
+import SearchPage from './component/search/SearchPage';
 import SeriePage from './component/serie/SeriePage';
 import WatchSerieComponent from './component/serie/WatchSerieComponent';
+import navigatorService from './service/NavigatorService';
 
 import categoryService from './service/CategoryService';
 
@@ -40,20 +42,21 @@ class App extends Component {
         <MuiThemeProvider>
           <HashRouter>
             <div>
-              <Route path={'/'} render={(props) => <NavBar {...props} />}/>
+              <Route path={'/'} render={(props) => {
+                navigatorService.setHistory(props.history);
+                return <NavBar {...props} />}}/>
               <div id={'nano-bar-indicator'}/>
               <div id={'main-content'}>
                 <Switch>
-                  <Route path={'/home/page/:page'} component={HomeComponent}/>
+                  <Route path={'/home'} component={HomeComponent}/>
                   <Route path={'/search/page/:page'} component={SearchComponent}/>
-                  <Route path={'/movie/:movieId'} component={MovieComponent}/>
                   <Route path={'/category'} component={CategoryPage}/>
                   <Route path={'/actor'} component={ActorPage}/>
                   <Route path={'/serie'} component={SeriePage}/>
+                  <Route path={'/search'} component={SearchPage}/>
                   <Route path={'/watch/serie/:serieId'} component={WatchSerieComponent}/>
+                  <Route path={'/watch/movie/:movieId'} component={MovieComponent}/>
                   <Redirect exact={true} from={'/'} to={'/home'}/>
-                  <Redirect exact={true} from={'/home'} to={'/home/page'}/>
-                  <Redirect exact={true} from={'/home/page'} to={'/home/page/1'}/>
                 </Switch>
               </div>
             </div>

@@ -88,7 +88,7 @@ class WatchComponent extends React.Component {
         <div id={'movie-content'} className={['grid-wrapper-2-cols']}>
           <div>
             <h4>Diễn Viên</h4>
-            {this.state.movie.actors.map((a, i) => (
+            {this.state.movie.actorEmbeded.map((a, i) => (
               <span key={'film-details-actor-' + a.key}>
                 <a onClick={() => this.handleActorClick(a)}
                    style={{color: '#0645AD'}}>{a.title}</a>
@@ -98,7 +98,7 @@ class WatchComponent extends React.Component {
           </div>
           <div>
             <h4>Thể Loại</h4>
-            {this.state.movie.categories.map((c, i) => (
+            {this.state.movie.categoryEmbeded.map((c, i) => (
               <span key={'film-details-category-' + c.key}>
                 <a onClick={() => this.handleCategoryClick(c)}
                    style={{color: '#0645AD'}}>{c.title}</a>

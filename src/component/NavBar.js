@@ -15,6 +15,7 @@ class NavBar extends React.Component {
       categories: categoryService.getCategories(),
       currentCategory: {},
     };
+    console.log(categoryService.getCategories());
     this.onMenuItemClick.bind(this);
   }
 
@@ -82,19 +83,6 @@ class NavBar extends React.Component {
       </Drawer>
       <Navbar collapseOnSelect fixedTop id={'navbar-material'}>
         <Navbar.Header>
-          <Route path={'/home'} render={() => <Navbar.Brand>Trang Chủ</Navbar.Brand>}/>
-          <Route path={'/movie'} render={() => <Navbar.Brand>Xem Phim</Navbar.Brand>}/>
-          <Route path={'/search'} render={() => <Navbar.Brand>Tìm Kiếm</Navbar.Brand>}/>
-          <Route path={'/actor'} render={() => <Navbar.Brand>Diễn Viên</Navbar.Brand>}/>
-          <Route path={'/serie'} render={() => <Navbar.Brand>Phim Bộ</Navbar.Brand>}/>
-          <Route path={'/category/:categoryKey/page/:page'} render={() => {
-            const catKey = this.getCurrentCategoryKey();
-            const current = this.state.categories.filter(cat => cat.key === catKey)[0];
-            if (current) {
-              return (<Navbar.Brand>{current.title}</Navbar.Brand>)
-            }
-            return <div/>
-          }}/>
           <Navbar.Toggle/>
         </Navbar.Header>
         <Navbar.Collapse>
@@ -105,16 +93,11 @@ class NavBar extends React.Component {
             <LinkContainer to={'/serie'}>
               <NavItem eventKey={2}>Phim Bộ</NavItem>
             </LinkContainer>
+            <LinkContainer to={'/search'}>
+              <NavItem eventKey={3}>Tìm Kiếm</NavItem>
+            </LinkContainer>
             <NavItem eventKey={5} onClick={this.handleToggle}>Chọn Thể Loại</NavItem>
           </Nav>
-          <Navbar.Form pullRight>
-            <TextField className={'text-field-quick-search'} style={{maxHeight: 34}}
-                       underlineStyle={{borderColor: '#008080'}}
-                       underlineFocusStyle={{borderColor: '#008080'}}
-                       hintText='Quick Search' onKeyPress={(e) => {
-              this.onQuickSearchKeyPress(e)
-            }}/>
-          </Navbar.Form>
         </Navbar.Collapse>
       </Navbar>
     </div>

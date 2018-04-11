@@ -4,45 +4,6 @@ body {
   font-family: Roboto, Helvetica, Arial, sans-serif !important;
 }
 
-#navbar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 15000;
-}
-
-#navbar-container svg {
-  fill: #333!important;
-}
-
-#navbar-search-box {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  left: 64px;
-  min-width: 328px;
-  max-width: 720px;
-  z-index: 15001;
-}
-
-#drawer-container {
-  position: fixed;
-  z-index: 15002;
-  top: 64px;
-}
-
-#main-content {
-  padding-top: 72px;
-  margin-bottom: 16px;
-}
-
-.search-box-container {
-  display: block;
-  justify-content: center;
-  padding: 0;
-}
-
 .cardview-movie-poster {
   max-width: 160px;
   max-height: 245px;

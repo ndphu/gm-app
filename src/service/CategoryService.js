@@ -6,6 +6,7 @@ class CategoryService {
   };
 
   fetchCategory = () => {
+    console.log(this.categories);
     if (!this.categories) {
       return api.get('/category');
     } else {

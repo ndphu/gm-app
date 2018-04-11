@@ -23,6 +23,10 @@ class MovieService {
     localStorage.setItem('currentMovie', JSON.stringify(m));
   };
 
+  forceReload = (m) => {
+    return api.get(`/movie/${m._id}/forceReload`);
+  };
+
   getCurrentMovie = () => JSON.parse(localStorage.getItem('currentMovie'));
 }
 

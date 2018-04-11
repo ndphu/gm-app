@@ -3,6 +3,7 @@ import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import PropTypes from 'prop-types';
 import React from 'react';
 import categoryService from '../../../service/CategoryService';
+import navigationService from '../../../service/NavigatorService';
 import Header from '../commons/Header';
 import LeftDrawer from '../commons/LeftDrawer';
 import ThemeDefault from '../theme-default';
@@ -10,47 +11,46 @@ import Web from 'material-ui/svg-icons/av/web';
 import ActionHome from 'material-ui/svg-icons/action/home';
 
 class AppLayout extends React.Component {
-  
   constructor(props) {
     super(props);
     this.state = {
       navDrawerOpen: this.props.width >= LARGE
     };
   }
-  
+
   componentDidMount = () => {
-    this.setState(
-      {
-        menus: [
-          {text: 'Trang Chủ', icon: <ActionHome/>, link: '/home'},
-          {
-            text: 'Thể Loại', icon: <Web/>, children: categoryService.getCategories().map(category => ({
-              text: category.title,
-              icon: <Web/>,
-              link: '/category/' + category.key + '/page/1'
-            }))
-          },
-        ]
-      });
+    this.setState({
+      menus: [
+        {text: 'Trang Chủ', icon: <ActionHome/>, onClick: () => navigationService.goToHome()},
+        {
+          text: 'Thể Loại', icon: <Web/>, children: categoryService.getCategories().map(category => ({
+            text: category.title,
+            icon: <Web/>,
+            onClick: () => navigationService.goToCategory(category)
+          }))
+        },
+      ]
+    });
   };
-  
-  
+
+
   componentWillReceiveProps(nextProps) {
     if (this.props.width !== nextProps.width) {
       this.setState({navDrawerOpen: nextProps.width === LARGE});
     }
   }
-  
+
   handleChangeRequestNavDrawer() {
     this.setState({
       navDrawerOpen: !this.state.navDrawerOpen
     });
   }
-  
+
   render() {
+    console.log(this.props);
     let {navDrawerOpen} = this.state;
     const paddingLeftDrawerOpen = ThemeDefault.drawer.width + 6;
-    
+
     const styles = {
       header: {
         paddingLeft: navDrawerOpen ? paddingLeftDrawerOpen : 0
@@ -60,7 +60,7 @@ class AppLayout extends React.Component {
         paddingLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
       }
     };
-    
+
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <div>
@@ -68,7 +68,7 @@ class AppLayout extends React.Component {
                   handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
           <LeftDrawer navDrawerOpen={navDrawerOpen}
                       menus={this.state.menus}/>
-          
+
           <div style={styles.container}>
             {this.props.children}
           </div>

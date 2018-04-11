@@ -16,12 +16,12 @@ class MovieListItem extends React.Component {
       <img src={this.props.movie.poster}
            alt={this.props.movie.title}
            onClick={() => {
-             navigatorService.goToSerie(this.props.movie)
+             navigatorService.goToMovie(this.props.movie)
            }}/>
       <div>
         <a className={'list-item-movie-title'}
            onClick={() => {
-             navigatorService.goToSerie(this.props.movie)
+             navigatorService.goToMovie(this.props.movie)
            }}>
           {this.props.movie.title}
         </a>

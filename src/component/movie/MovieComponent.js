@@ -10,11 +10,14 @@ class WatchComponent extends React.Component {
     super(props);
     this.state = {
       movie: null,
+      videoError: false,
     };
     this.handleActorClick.bind(this);
     this.downloadVideo.bind(this);
     this.goBack.bind(this);
     this.handleCategoryClick.bind(this);
+    this.onVideoError.bind(this);
+    this.reloadVideo.bind(this);
   }
 
   handleCountryClick = () => {
@@ -62,23 +65,48 @@ class WatchComponent extends React.Component {
     this.setState({showInfo: !this.state.showInfo});
   };
 
+  onVideoError = () => {
+    this.setState({
+      videoError: true,
+    })
+  };
+
+  reloadVideo = () => {
+    loader.start();
+    movieService.forceReload(this.state.movie).then(m => {
+      this.setState({
+        movie: m,
+        videoError: false,
+      });
+      loader.finish();
+    }).catch(() => {
+      loader.finish();
+    });
+  };
+
   render = () => (
     <div className={['page-container']}>
       {this.state.movie &&
       <Paper zDepth={1} rounded={false} id={'movie-paper-container'}>
-        <Player
+        {!this.state.videoError && <Player
           playsInline={true}
           fluid={true}
           preload={'auto'}
           poster={this.state.movie.bigPoster}
-          src={this.state.movie.videoSource}>
+          src={this.state.movie.videoSource}
+          onError={this.onVideoError}>
           <BigPlayButton position="center"/>
         </Player>
+        }
         <a ref={node => this.downloadNode = node} href={this.state.movie.videoSource} target={'_blank'} download
            hidden>download</a>
         <h2 id={'movie-title'}>{this.state.movie.title}</h2>
+        {this.state.videoError &&
+        <h4 style={{color: 'crimson', padding: 16}}>Không tìm thấy file video. Thử Tải Lại có thể khắc phục vấn
+          đề. Quá trình tải lại có thể mất vài phút.</h4>}
         <div id={'movie-button-container'}>
-          <RaisedButton label="Download" onClick={this.downloadVideo}/>
+          {this.state.videoError && <RaisedButton primary={true} label="Tải Lại" onClick={this.reloadVideo}/>}
+          {!this.state.videoError && <RaisedButton label="Download" onClick={this.downloadVideo}/>}
           <RaisedButton label="Trở Về" onClick={this.goBack}/>
         </div>
         <div id={'movie-content'}>

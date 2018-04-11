@@ -30,6 +30,18 @@ class NavigatorService {
   goToHome() {
     this.history.push(`/home`);
   }
+
+  setLocation(location) {
+    this.location = location;
+  }
+
+  getHistory() {
+    return this.history;
+  }
+
+  getLocation() {
+    return this.location;
+  }
 }
 
 const navigatorService = new NavigatorService();

@@ -39,6 +39,7 @@ class App extends Component {
         <MuiThemeProvider>
           <HashRouter>
             <Route path={'/'} render={(props) => {
+              navigatorService.setLocation(props.location);
               navigatorService.setHistory(props.history);
               return <AppLayout children={
                 <Switch>

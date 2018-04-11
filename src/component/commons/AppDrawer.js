@@ -20,13 +20,13 @@ class AppDrawer extends React.Component {
                        }}/>
     });
   }
-
+  
   componentDidMount = () => {
     this.setState({
       open: this.props.open,
     })
   };
-
+  
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.open !== this.state.open) {
       this.setState({
@@ -34,7 +34,7 @@ class AppDrawer extends React.Component {
       });
     }
   };
-
+  
   render = () => (
     <Drawer
       docked={false}
@@ -42,7 +42,7 @@ class AppDrawer extends React.Component {
       open={this.state.open}
       onRequestChange={(open) => this.setState({open})}>
       <ListItem
-        primaryText={"Home"}
+        primaryText={'Trang Chủ'}
         leftIcon={<HomeIcon/>}
         onClick={() => {
           this.setState({open: false});
@@ -50,7 +50,7 @@ class AppDrawer extends React.Component {
         }}
       />
       <ListItem
-        primaryText="Genres"
+        primaryText='Thể Loại'
         leftIcon={<GenreIcon/>}
         initiallyOpen={false}
         primaryTogglesNestedList={true}

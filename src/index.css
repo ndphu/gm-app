@@ -12,6 +12,10 @@ body {
   z-index: 15000;
 }
 
+#navbar-container svg {
+  fill: #333!important;
+}
+
 #navbar-search-box {
   position: fixed;
   top: 12px;

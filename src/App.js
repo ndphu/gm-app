@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
+import {AppBar} from 'material-ui';
+import {grey200} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React, {Component} from 'react';
 import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
-import HomeComponent from './component/home/HomeComponent';
-import MovieComponent from "./component/movie/MovieComponent";
-import CategoryPage from './component/category/CategoryPage';
 import ActorPage from './component/actor/ActorPage';
+import CategoryPage from './component/category/CategoryPage';
+import AppDrawer from './component/commons/AppDrawer';
+import SearchBox from './component/commons/SearchBox';
+import HomeComponent from './component/home/HomeComponent';
+import MovieComponent from './component/movie/MovieComponent';
 import SearchPage from './component/search/SearchPage';
 import SeriePage from './component/serie/SeriePage';
 import WatchSerieComponent from './component/serie/WatchSerieComponent';
-import navigatorService from './service/NavigatorService';
 
 import categoryService from './service/CategoryService';
-import SearchBox from './component/commons/SearchBox';
-import {AppBar} from 'material-ui';
-import {blueGrey500} from 'material-ui/styles/colors';
-import AppDrawer from './component/commons/AppDrawer';
+import navigatorService from './service/NavigatorService';
 
 class App extends Component {
   constructor(props) {
@@ -54,7 +54,7 @@ class App extends Component {
                   open={this.state.drawerOpen}/>
               </div>
               <div id={'navbar-container'}>
-                <AppBar style={{backgroundColor: blueGrey500}}
+                <AppBar style={{backgroundColor: grey200}}
                         onLeftIconButtonClick={() => {
                           this.setState({drawerOpen: true});
                         }}/>

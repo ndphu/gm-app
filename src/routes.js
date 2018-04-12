@@ -1,7 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
-import {Route} from 'react-router-dom';
-import {Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import MovieComponent from './component/movie/MovieComponent';
 import WatchSerieComponent from './component/serie/WatchSerieComponent';
 import ActorPage from './page/ActorPage';
@@ -20,7 +18,8 @@ const AppRoutes = (props) => {
       <Route path={'/actor'} component={ActorPage}/>
       <Route path={'/serie'} component={SeriePage}/>
       <Route path={'/search/q/:query'} component={SearchPage}/>
-      <Route path={'/filmRequest'} component={FilmRequestPage}/>
+      <Route exact={true} path={'/filmRequest'} component={FilmRequestPage}/>
+      <Route path={'/filmRequest/q/:query'} component={FilmRequestPage}/>
       <Route path={'/watch/serie/:serieId'} component={WatchSerieComponent}/>
       <Route path={'/watch/movie/:movieId'} component={MovieComponent}/>
       <Redirect exact={true} from={'/'} to={'/home'}/>

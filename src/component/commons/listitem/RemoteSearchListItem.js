@@ -14,7 +14,8 @@ class RemoteSearchListItem extends React.Component {
       <div className={'item-poster'}
            onClick={() => {this.props.onItemClick(this.props.item)}}
            style={{
-             backgroundImage: `url(${this.props.item.poster})`
+             backgroundImage: `url(${this.props.item.poster})`,
+             backgroundPosition: 'center',
            }}/>
       <div>
         <a className={'list-item-remote-search-title'}
@@ -24,7 +25,6 @@ class RemoteSearchListItem extends React.Component {
         <span className={'list-item-remote-search-subtitle'}
               onClick={() => {this.props.onItemClick(this.props.item)}}>{this.props.item.subTitle}</span>
       </div>
-      {!this.props.isLast && <Divider/>}
     </div>
   )
 }

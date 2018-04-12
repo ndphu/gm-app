@@ -43,8 +43,12 @@ class NavigatorService {
     return this.location;
   }
   
-  goToFilmRequest() {
-    this.history.push(`/filmRequest`)
+  goToFilmRequest(query) {
+    if (query) {
+      this.history.push(`/filmRequest/q/${query}`)
+    } else {
+      this.history.push(`/filmRequest`)
+    }
   }
 }
 

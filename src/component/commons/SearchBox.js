@@ -5,21 +5,22 @@ class SearchBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultValue: ''
+      query: props.query
     };
     this.onSearchKeyPress.bind(this);
   }
 
   componentDidMount = () => {
     this.setState({
-      defaultValue: this.props.defaultValue,
+      query: this.props.query,
     })
   };
 
   componentWillReceiveProps = (nextProps) => {
-    if (nextProps.defaultValue !== this.state.defaultValue) {
+    if (nextProps.query !== this.state.query) {
+      console.log('set');
       this.setState({
-        defaultValue: nextProps.defaultValue,
+        query: nextProps.query,
       });
     }
   };
@@ -33,11 +34,12 @@ class SearchBox extends React.Component {
   };
 
   render = () => {
+    console.log(this.state.query);
     return (
         <Paper style={{padding: 4}}>
           <TextField
             fullWidth={true}
-            defaultValue={this.state.defaultValue ? this.state.defaultValue : ''}
+            defaultValue={this.props.query}
             style={{
               fontSize: 14,
               paddingLeft: 12,

@@ -1,14 +1,15 @@
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, {Component} from 'react';
 import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
-import ActorPage from './component/actor/ActorPage';
-import CategoryPage from './component/category/CategoryPage';
-import HomeComponent from './component/home/HomeComponent';
-import AppLayout from './component/layout/containers/AppLayout';
+import ActorPage from './page/ActorPage';
+import CategoryPage from './page/CategoryPage';
+import HomeComponent from './page/HomePage';
+import AppLayout from './component/layout/AppLayout';
 import MovieComponent from './component/movie/MovieComponent';
-import SearchPage from './component/search/SearchPage';
-import SeriePage from './component/serie/SeriePage';
+import SearchPage from './page/SearchPage';
+import SeriePage from './page/SeriePage';
 import WatchSerieComponent from './component/serie/WatchSerieComponent';
+import AppRoutes from './routes';
 import categoryService from './service/CategoryService';
 import navigatorService from './service/NavigatorService';
 
@@ -41,18 +42,7 @@ class App extends Component {
             <Route path={'/'} render={(props) => {
               navigatorService.setLocation(props.location);
               navigatorService.setHistory(props.history);
-              return <AppLayout children={
-                <Switch>
-                  <Route path={'/home'} component={HomeComponent}/>
-                  <Route path={'/category'} component={CategoryPage}/>
-                  <Route path={'/actor'} component={ActorPage}/>
-                  <Route path={'/serie'} component={SeriePage}/>
-                  <Route path={'/search/q/:query'} component={SearchPage}/>
-                  <Route path={'/watch/serie/:serieId'} component={WatchSerieComponent}/>
-                  <Route path={'/watch/movie/:movieId'} component={MovieComponent}/>
-                  <Redirect exact={true} from={'/'} to={'/home'}/>
-                </Switch>
-              }/>
+              return <AppLayout children={<AppRoutes/>}/>
             }}/>
           </HashRouter>
         </MuiThemeProvider>}

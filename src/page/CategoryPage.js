@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryComponent from './CategoryComponent';
+import CategoryComponent from '../component/category/CategoryComponent';
 import {Redirect, Route} from 'react-router-dom';
 
 class CategoryPage extends React.Component {

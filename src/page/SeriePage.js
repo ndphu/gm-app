@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import SeriesComponent from './SerieComponent';
+import SeriesComponent from '../component/serie/SerieComponent';
 import {Paper, TextField} from 'material-ui';
 
 class SeriePage extends React.Component {

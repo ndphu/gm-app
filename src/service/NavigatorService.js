@@ -42,6 +42,10 @@ class NavigatorService {
   getLocation() {
     return this.location;
   }
+  
+  goToFilmRequest() {
+    this.history.push(`/filmRequest`)
+  }
 }
 
 const navigatorService = new NavigatorService();

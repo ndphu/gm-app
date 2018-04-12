@@ -1,11 +1,11 @@
 import React from 'react';
-import actions from '../../actions/Actions';
-import homeService from '../../service/HomeService'
-import {loader} from '../commons/GlobalLoaderBar';
-import MovieGridComponent from '../commons/MovieGridComponent';
-import SectionHeader from '../commons/SectionHeader';
+import actions from '../actions/Actions';
+import homeService from '../service/HomeService'
+import {loader} from '../component/commons/GlobalLoaderBar';
+import MovieGridComponent from '../component/commons/MovieGridComponent';
+import SectionHeader from '../component/commons/SectionHeader';
 
-class HomeComponent extends React.Component {
+class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,4 +78,4 @@ class HomeComponent extends React.Component {
   
 }
 
-export default HomeComponent;
+export default HomePage;

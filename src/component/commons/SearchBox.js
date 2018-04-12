@@ -1,6 +1,5 @@
-import React from 'react';
 import {Paper, TextField} from 'material-ui';
-import navigatorService from '../../service/NavigatorService';
+import React from 'react';
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -29,14 +28,13 @@ class SearchBox extends React.Component {
     e.target.setAttribute('maxlength', 128);
     const query = e.target.value.trim();
     if (e.key === 'Enter' && query) {
-      navigatorService.goToSearch(query);
+      this.props.onSearchSubmit(query);
     }
   };
 
   render = () => {
     return (
-      <div className={['search-box-container']}>
-        <Paper>
+        <Paper style={{padding: 4}}>
           <TextField
             fullWidth={true}
             defaultValue={this.state.defaultValue ? this.state.defaultValue : ''}
@@ -52,7 +50,6 @@ class SearchBox extends React.Component {
             underlineStyle={{display: 'none'}}
             underlineFocusStyle={{display: 'none'}}/>
         </Paper>
-      </div>
     );
   }
 }

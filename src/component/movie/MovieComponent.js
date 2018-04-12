@@ -76,7 +76,7 @@ class WatchComponent extends React.Component {
     movieService.forceReload(this.state.movie).then(m => {
       this.setState({
         movie: m,
-        videoError: false,
+        videoError: m.videoSource !== '',
       });
       loader.finish();
     }).catch(() => {

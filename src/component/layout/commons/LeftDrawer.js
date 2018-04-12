@@ -36,7 +36,6 @@ function getListItem(menu, index, isSubmenu) {
     primaryText={menu.text}
     leftIcon={isSubmenu ? null : menu.icon}
     nestedItems={childItems}
-    initiallyOpen={true}
     primaryTogglesNestedList={true}
     hoverColor={blue300}
     onClick={menu.onClick}
@@ -83,7 +82,7 @@ class LeftDrawer extends React.Component {
         docked={true}
         open={this.state.navDrawerOpen}>
         <div style={styles.logo}>
-          Good Movies
+          Movie Hub
         </div>
         <div style={{display: 'flex', maxHeight: 450}}>
           <List style={{width: '100%'}}>

@@ -60,6 +60,52 @@ body {
   cursor: pointer;
 }
 
+.list-item-remote-search-container {
+  position: relative;
+}
+
+.list-item-remote-search-container .item-poster {
+  background-size: cover;
+  max-width: 220px;
+  min-width: 220px;
+  max-height: 115px;
+  min-height: 115px;
+  cursor: pointer;
+  margin: 4px 0;
+  position: relative;
+}
+
+.list-item-remote-search-container div {
+  display: inline-block;
+  position: absolute;
+  padding: 4px 8px;
+}
+
+
+.list-item-remote-search-container div > a {
+  display: block;
+}
+
+.list-item-remote-search-container a,span {
+  padding: 2px;
+  color: #616161;
+  max-height: 48px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.list-item-remote-search-title {
+  font-size: 16px;
+}
+
+.list-item-remote-search-subtitle {
+  font-size: 13px;
+}
+
+.list-item-remote-search-container hr {
+  margin-left: 230px!important;
+}
+
 .cardview-movie-poster img {
   min-width: 160px;
   max-width: 100%;
@@ -143,9 +189,6 @@ body {
 }
 
 .grid-wrapper {
-  margin-top: 8px;
-  padding-left: 8px;
-  padding-right: 8px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 160px);
   grid-gap: 10px;

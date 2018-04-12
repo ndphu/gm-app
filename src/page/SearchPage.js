@@ -1,10 +1,11 @@
 import React from 'react';
-import navigatorService from '../../service/NavigatorService';
-import searchService from '../../service/SearchService';
-import SearchResultSection from '../commons/SearchResultSection';
-import {loader} from '../commons/GlobalLoaderBar';
-import MovieSearchResultSection from '../commons/MovieSearchResultSection'
-import SerieSearchResultSection from '../commons/SerieSearchResultSection';
+import navigatorService from '../service/NavigatorService';
+import searchService from '../service/SearchService';
+import SearchResultSection from '../component/commons/SearchResultSection';
+import {loader} from '../component/commons/GlobalLoaderBar';
+import MovieSearchResultSection from '../component/commons/MovieSearchResultSection'
+import SerieSearchResultSection from '../component/commons/SerieSearchResultSection';
+import PageBase from './PageBase';
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -42,15 +43,10 @@ class SearchPage extends React.Component {
   };
 
   render = () => (
-    <div className={['search-page-container']}>
+    <PageBase title={<span>Kết quả tìm kiếm bởi từ khóa <span style={{color:'crimson'}}>{this.state.query}</span></span>}>
       {this.state.notFound && (
         <div className={['search-not-found-message']}>
           <h4>Không tìm thấy phim liên quan đến <span>{this.state.query}</span>. Vui lòng thử với từ khóa khác.</h4>
-        </div>
-      )}
-      {!this.state.notFound && (
-        <div className={['search-not-found-message']}>
-          <h4>Kết quả tìm kiếm của <span>{this.state.query}</span>.</h4>
         </div>
       )}
       {this.state.result && (
@@ -85,7 +81,7 @@ class SearchPage extends React.Component {
         </div>
       )}
 
-    </div>
+    </PageBase>
   )
 }
 

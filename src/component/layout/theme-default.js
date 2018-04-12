@@ -3,6 +3,7 @@ import {blue600, grey100, grey200, grey900} from 'material-ui/styles/colors';
 
 const themeDefault = getMuiTheme({
   palette: {
+    primaryColor: blue600,
   },
   appBar: {
     height: 57,
@@ -14,6 +15,9 @@ const themeDefault = getMuiTheme({
   },
   raisedButton: {
     primaryColor: blue600,
+  },
+  textField: {
+    focusColor: blue600,
   }
 });
 

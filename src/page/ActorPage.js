@@ -1,6 +1,6 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
-import ActorComponent from './ActorComponent';
+import ActorComponent from '../component/actor/ActorComponent';
 
 class ActorPage extends React.Component {
   render = () => (

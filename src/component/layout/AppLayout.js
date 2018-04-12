@@ -2,13 +2,13 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import PropTypes from 'prop-types';
 import React from 'react';
-import categoryService from '../../../service/CategoryService';
-import navigationService from '../../../service/NavigatorService';
-import Header from '../commons/Header';
-import LeftDrawer from '../commons/LeftDrawer';
-import ThemeDefault from '../theme-default';
+import categoryService from '../../service/CategoryService';
+import navigationService from '../../service/NavigatorService';
+import Header from './commons/Header';
+import LeftDrawer from './commons/LeftDrawer';
+import staticNav from './nav';
+import ThemeDefault from './theme-default';
 import Web from 'material-ui/svg-icons/av/web';
-import ActionHome from 'material-ui/svg-icons/action/home';
 
 class AppLayout extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class AppLayout extends React.Component {
   componentDidMount = () => {
     this.setState({
       menus: [
-        {text: 'Trang Chủ', icon: <ActionHome/>, onClick: () => navigationService.goToHome()},
+        ...staticNav,
         {
           text: 'Thể Loại', icon: <Web/>, children: categoryService.getCategories().map(category => ({
             text: category.title,

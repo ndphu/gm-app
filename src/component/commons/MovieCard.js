@@ -127,8 +127,8 @@ class MovieCard extends React.Component {
             <span style={style.paragraphEnd} className={'paragraph-end'}/>
           </a>
         </OverlayTrigger>
-        <OverlayTrigger placement="bottom" overlay={this.getTooltip(this.props.movie.categories.join(','))}>
-          <a style={style.subTitle} onClick={this.handleCategoryClick}>{this.props.movie.categories[0]}
+        <OverlayTrigger placement="bottom" overlay={this.getTooltip(this.props.movie.genres.join(','))}>
+          <a style={style.subTitle} onClick={this.handleCategoryClick}>{this.props.movie.genres[0]}
             <span style={style.paragraphEnd} className={'paragraph-end'}/>
           </a>
         </OverlayTrigger>

@@ -1,6 +1,6 @@
+import {Drawer, MenuItem, RaisedButton} from 'material-ui';
 import React from 'react';
 import categoryService from '../../service/CategoryService';
-import {Drawer, MenuItem, RaisedButton} from 'material-ui';
 
 
 class CategorySelectionComponent extends React.Component {

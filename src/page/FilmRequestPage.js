@@ -43,7 +43,7 @@ class FilmRequestPage extends React.Component {
   onSearchItemClick = (item) => {
     loader.start();
 
-    requestService.request(item.link).then((resp) => {
+    requestService.request(item.link, item.poster).then((resp) => {
         console.log(resp);
         loader.finish();
       }
@@ -80,9 +80,6 @@ class FilmRequestPage extends React.Component {
         <div>
           <SearchBox onSearchSubmit={this.onSearchSubmit}
                      query={this.state.query}/>
-          {/*<div style={{marginTop: 16}}>*/}
-          {/*{items}*/}
-          {/*</div>*/}
           <Paper style={{marginTop: 16}}>
             {items}
           </Paper>

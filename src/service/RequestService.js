@@ -1,9 +1,8 @@
 import api from '../client/Api';
 
 class RequestService {
-  request = (link) => {
-    const data = btoa(link);
-    return api.post('/request', {url: data});
+  request = (link, poster) => {
+    return api.post('/request', {url: btoa(link), poster: btoa(poster)});
   }
 }
 

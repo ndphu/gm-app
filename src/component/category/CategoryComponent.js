@@ -1,5 +1,4 @@
 import React from 'react';
-import actions from '../../actions/Actions';
 import categoryService from '../../service/CategoryService';
 import {loader} from '../commons/GlobalLoaderBar';
 import MovieGridComponent from '../commons/MovieGridComponent';
@@ -52,19 +51,6 @@ class CategoryComponent extends React.Component {
         loader.finish();
       }
     )
-  };
-  
-  handleItemClick = (action, data) => {
-    switch (action) {
-      case actions.movieClick:
-        this.props.history.push(`/movie/${data._id}`);
-        break;
-      case actions.categoryClick:
-        this.props.history.push(`/category/${data.key}/page/1`);
-        break;
-      default:
-        break;
-    }
   };
   
   paginationPageClick = (page) => {

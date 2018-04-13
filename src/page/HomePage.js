@@ -1,9 +1,8 @@
 import React from 'react';
-import actions from '../actions/Actions';
-import homeService from '../service/HomeService'
 import {loader} from '../component/commons/GlobalLoaderBar';
 import MovieGridComponent from '../component/commons/MovieGridComponent';
 import SectionHeader from '../component/commons/SectionHeader';
+import homeService from '../service/HomeService'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -11,7 +10,6 @@ class HomePage extends React.Component {
     this.state = {
       sections: [],
     };
-    this.handleItemClick.bind(this);
     this.handleSectionHeaderClick.bind(this);
     this.paginationPageClick.bind(this);
   }
@@ -39,19 +37,6 @@ class HomePage extends React.Component {
         })
       }
     )
-  };
-  
-  handleItemClick = (action, data) => {
-    switch (action) {
-      case actions.movieClick:
-        this.props.history.push(`/movie/${data.id}`);
-        break;
-      case actions.categoryClick:
-        this.props.history.push(`/category/${data.key}/page/1`);
-        break;
-      default:
-        break;
-    }
   };
   
   handleSectionHeaderClick = (category) => {

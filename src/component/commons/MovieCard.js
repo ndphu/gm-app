@@ -78,11 +78,11 @@ class MovieCard extends React.Component {
   }
 
   handleMovieClick = () => {
-    navigatorService.goToMovie(this.props.movie);
+    navigatorService.goToMovie(this.props.item);
   };
 
   handleCategoryClick = () => {
-    navigatorService.goToCategory(categoryService.getCategoryByTitle(this.props.movie.categories[0]));
+    navigatorService.goToCategory(categoryService.getCategoryByTitle(this.props.item.categories[0]));
   };
 
   onMouseEnter = () => {
@@ -110,8 +110,8 @@ class MovieCard extends React.Component {
            onMouseEnter={this.onMouseEnter}
            onMouseLeave={this.onMouseLeave}>
       <div className={'cardview-movie-poster'}>
-        <img src={this.props.movie.poster}
-             alt={this.props.movie.title}
+        <img src={this.props.item.poster}
+             alt={this.props.item.title}
              onClick={this.handleMovieClick}/>
         <div className={['preview-overlay-container', this.state.hovering ? 'show' : ''].join(' ')}>
           <div className={['click-handler']} onClick={this.handleMovieClick}/>
@@ -122,13 +122,13 @@ class MovieCard extends React.Component {
         </div>
       </div>
       <div style={style.details}>
-        <OverlayTrigger placement="bottom" overlay={this.getTooltip(this.props.movie.title)}>
-          <a style={style.title} onClick={this.handleMovieClick}>{this.props.movie.title}
+        <OverlayTrigger placement="bottom" overlay={this.getTooltip(this.props.item.title)}>
+          <a style={style.title} onClick={this.handleMovieClick}>{this.props.item.title}
             <span style={style.paragraphEnd} className={'paragraph-end'}/>
           </a>
         </OverlayTrigger>
-        <OverlayTrigger placement="bottom" overlay={this.getTooltip(this.props.movie.genres.join(','))}>
-          <a style={style.subTitle} onClick={this.handleCategoryClick}>{this.props.movie.genres[0]}
+        <OverlayTrigger placement="bottom" overlay={this.getTooltip(this.props.item.genres.join(','))}>
+          <a style={style.subTitle} onClick={this.handleCategoryClick}>{this.props.item.genres[0]}
             <span style={style.paragraphEnd} className={'paragraph-end'}/>
           </a>
         </OverlayTrigger>
@@ -140,12 +140,12 @@ class MovieCard extends React.Component {
             position: 'absolute',
             left: 20,
             display: 'inline-block'
-          }}>{this.props.movie.likes}</span>
+          }}>{this.props.item.likes}</span>
           <span style={{
             position: 'absolute',
             right: 0,
             display: 'inline-block'
-          }}>{(this.props.movie.views ? this.props.movie.views : 0) + ' views'}</span>
+          }}>{(this.props.item.views ? this.props.item.views : 0) + ' views'}</span>
         </div>
       </div>
     </Paper>

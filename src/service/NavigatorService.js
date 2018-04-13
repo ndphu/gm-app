@@ -4,7 +4,7 @@ class NavigatorService {
   }
   
   goToMovie = (movie) => {
-    this.history.push(`/watch/movie/${movie._id}`)
+    this.history.push(`/watch/${movie._id}`)
   };
   
   goToCategory = (category, page) => {

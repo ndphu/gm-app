@@ -16,14 +16,15 @@ class SearchPage extends React.Component {
   }
 
   componentDidMount = () => {
-    if (!this.state.query) {
-      this.performSearch(this.props.match.params.query);
+    const query = this.props.match.params.query;
+    if (query) {
+      this.performSearch(query);
     }
   };
 
   componentWillReceiveProps = (nextProps) => {
     const nextQuery = nextProps.match.params.query;
-    if (nextQuery !== this.state.query) {
+    if (nextQuery && nextQuery !== this.state.query) {
       this.performSearch(nextQuery);
     }
   };

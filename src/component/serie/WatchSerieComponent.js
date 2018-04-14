@@ -6,7 +6,6 @@ import "../../../node_modules/video-react/dist/video-react.css";
 import {BigPlayButton, Player} from 'video-react';
 import navigatorService from '../../service/NavigatorService';
 import categoryService from '../../service/CategoryService';
-import movieService from '../../service/MovieService';
 
 class WatchSerieComponent extends React.Component {
   constructor(props) {

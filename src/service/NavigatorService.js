@@ -50,6 +50,10 @@ class NavigatorService {
       this.history.push(`/filmRequest`)
     }
   }
+
+  goToItem(item) {
+    this.history.push(`/watch/${item._id}`);
+  }
 }
 
 const navigatorService = new NavigatorService();

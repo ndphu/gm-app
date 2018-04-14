@@ -1,10 +1,14 @@
 import React from 'react';
+import {List, ListItem, makeSelectable} from 'material-ui/List';
 import PageBase from './PageBase';
 import itemService from '../service/ItemService';
 import {loader} from '../component/commons/GlobalLoaderBar';
-import {Divider, List, ListItem, Paper, RaisedButton} from 'material-ui';
+import {Divider, RaisedButton} from 'material-ui';
 import {BigPlayButton, Player} from 'video-react';
+import {blue300, blue600} from 'material-ui/styles/colors';
+import AvMovieIcon from 'material-ui/svg-icons/av/movie';
 
+let SelectableList = makeSelectable(List);
 
 class WatchPage extends React.Component {
   constructor(props) {
@@ -12,6 +16,7 @@ class WatchPage extends React.Component {
     this.state = {
       item: null
     };
+    this.onEpisodeClick.bind(this);
   }
 
   componentDidMount = () => {
@@ -19,81 +24,38 @@ class WatchPage extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (!prevState.episode || !this.state.episode || this.state.episode.order !== prevState.episode.order) {
-      if (this.refs.player) {
-        this.refs.player.load();
-        this.refs.player.play();
-      }
+    const prevSource = prevState.episode ? prevState.episode.videoSource : '';
+    const currentSource = this.state.episode ? this.state.episode.videoSource : '';
+    if (prevSource !== currentSource && this.refs.player) {
+      console.log('reload video');
+      this.refs.player.load();
+      this.refs.player.play();
     }
   }
+
+  componentWillUnmount = () => {
+  };
 
   getItem = (itemId) => {
     loader.start();
     itemService.getById(itemId).then((result) => {
-      const item = result[0];
-      const episodes = result[1];
-      const episode =  episodes.length === 0 ? null : episodes[0];
-      this.setState({
-        item: item,
-        episodes: episodes,
-        episode: episode,
-      });
+      this.setState(result);
       loader.finish();
-      if (item.type === 'MOVIE') {
-        if (episode) {
-          if (!episode.videoSource) {
-            loader.start();
-            itemService.crawEpisode(episode).then(episode => {
-              this.setState({
-                episode: episode
-              });
-              if (this.refs.player) {
-                this.refs.player.load();
-              }
-              loader.finish();
-            });
-          }
-        } else {
-          loader.start();
-          itemService.crawMovie(item).then(episode => {
-            this.setState({
-              episodes: [episode],
-              episode: episode,
-            });
-            if (this.refs.player) {
-              this.refs.player.load();
-              this.refs.player.play();
-            }
-            loader.finish();
-          });
-        }
-      } else if (item.type === 'SERIE') {
-        //this.reloadItem(item);
-      }
     });
   };
 
-  getVideoSource = () => {
-    const notFound = '/not_found';
-    const item = this.state.item;
-    const currentEpisode = this.state.currentEpisode;
-    if (item) {
-      switch (item.type) {
-        case 'MOVIE':
-          return this.state.episode ? this.state.episode.videoSource : notFound;
-        case 'SERIE':
-          if (currentEpisode) {
-            return currentEpisode.videoSource;
-          } else {
-            return notFound;
-          }
-        default: {
-          return notFound;
-        }
+  onVideoEnded = () => {
+    if (this.state.item && this.state.item.type === 'SERIE') {
+      if (this.state.episode && this.state.episode.order < this.state.episodes.length) {
+        this.changeEpisode(this.state.episodes[this.state.episode.order + 1]);
       }
-    } else {
-      return notFound;
     }
+  };
+
+  getVideoSource = () => {
+    const source = this.state.episode ? this.state.episode.videoSource : '';
+    console.log(source);
+    return source;
   };
 
   getPageTitle = () => {
@@ -102,7 +64,58 @@ class WatchPage extends React.Component {
   };
 
 
+  onEpisodeClick = (episode) => {
+    this.changeEpisode(episode);
+  };
+
+  changeEpisode(episode) {
+    if (!this.state.episode || this.state.episode.order !== episode.order) {
+      if (!episode.videoSource) {
+        if (this.refs.player) {
+          this.refs.player.pause();
+          if (this.refs.player.getState().isFullscreen) {
+            this.refs.player.toggleFullscreen();
+          }
+        }
+        loader.start();
+        itemService.crawEpisode(episode).then(episode => {
+          this.setCurrentEpisode(episode);
+          loader.finish();
+        })
+      } else {
+        this.setCurrentEpisode(episode);
+      }
+    }
+  }
+
+  setCurrentEpisode(episode) {
+    const newEpisodes = this.state.episodes.slice();
+    newEpisodes[episode.order] = episode;
+    this.setState({
+      episode: episode,
+      episodes: newEpisodes,
+    });
+  }
+
   render = () => {
+    const episodeItems = [];
+    if (this.state.episodes) {
+      this.state.episodes.forEach((e) => {
+        episodeItems.push(
+          <ListItem
+            leftIcon={<AvMovieIcon color={blue600}/>}
+            value={e.order}
+            initiallyOpen={true}
+            hoverColor={blue300}
+            key={`list-item-episode-${e._id}`}
+            primaryText={e.title}
+            onClick={() => {
+              this.onEpisodeClick(e);
+            }}
+          />)
+      });
+    }
+
     return <PageBase wrapPaper={true}
                      title={this.getPageTitle()}>
       {this.state.item &&
@@ -122,27 +135,17 @@ class WatchPage extends React.Component {
           fluid={true}
           preload={'auto'}
           poster={this.state.item.bigPoster}
-          src={this.state.episode ? this.state.episode.videoSource : ''}
-          onError={this.onVideoError}>
+          onError={this.onVideoError}
+          onEnded={this.onVideoEnded}
+          src={this.getVideoSource()}>
           <BigPlayButton position="center"/>
         </Player>}
-        {this.state.item.type === 'SERIE' &&
-        <div className={['watch-episode-episode-list']}>
-          <List>
-            {this.state.episodes.map(e => {
-              return (
-                <ListItem
-                  onClick={() => {
-                    this.onEpisodeClick(e)
-                  }}
-                  key={'episode-' + e.order}
-                  primaryText={e.title}
-                  secondaryText={e.subTitle}
-                />
-              );
-            })}
-          </List>
-        </div>
+
+        {
+          this.state.item.type === 'SERIE' && this.state.episodes.length > 0 &&
+        <SelectableList value={this.state.episode.order}>
+          {episodeItems}
+        </SelectableList>
         }
         <div id={'movie-content'}>
           {this.state.item.content}

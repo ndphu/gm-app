@@ -7,6 +7,7 @@ import HomePage from './page/HomePage';
 import SearchPage from './page/SearchPage';
 import SeriePage from './page/SeriePage';
 import WatchPage from './page/WatchPage';
+import ManagePage from './page/ManagePage';
 
 
 const AppRoutes = () => {
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route exact={true} path={'/filmRequest'} component={FilmRequestPage}/>
       <Route path={'/filmRequest/q/:query'} component={FilmRequestPage}/>
       <Route path={'/watch/:itemId'} component={WatchPage}/>
+      <Route path={'/manage'} component={ManagePage}/>
       <Redirect exact={true} from={'/'} to={'/home'}/>
     </Switch>
   );

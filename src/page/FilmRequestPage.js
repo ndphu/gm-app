@@ -19,7 +19,6 @@ class FilmRequestPage extends React.Component {
     super(props);
     this.state = {
       result: [],
-      query: '',
     };
   }
 
@@ -28,24 +27,25 @@ class FilmRequestPage extends React.Component {
   };
 
   componentDidMount = () => {
-    this.setState({
-      query: this.props.match.params.query,
-    });
+    const query = this.props.match.params.query;
+    console.log('Component did mount with query = ' + query);
+    if (query && query !== this.state.query) {
+      this.performRemoteSearch(query);
+    }
   };
 
   componentWillReceiveProps = (nextProps) => {
-    let newQuery = nextProps.match.params.query;
-    if (newQuery !== this.state.query) {
+    const newQuery = nextProps.match.params.query;
+    if (newQuery && newQuery !== this.state.query) {
       this.performRemoteSearch(newQuery);
     }
   };
 
   onSearchItemClick = (item) => {
     loader.start();
-
     requestService.request(item.link, item.poster).then((resp) => {
-        console.log(resp);
         loader.finish();
+        navigatorService.goToItem(resp);
       }
     );
   };
@@ -76,7 +76,7 @@ class FilmRequestPage extends React.Component {
     const items = this.getSearchResultItems();
 
     return (
-      <PageBase title="Yêu Cầu Phim">
+      <PageBase title="Tìm Phim">
         <div>
           <SearchBox onSearchSubmit={this.onSearchSubmit}
                      query={this.state.query}/>

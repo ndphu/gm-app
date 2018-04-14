@@ -41,7 +41,7 @@ class SearchBox extends React.Component {
             fullWidth={true}
             defaultValue={this.props.query}
             style={{
-              fontSize: 14,
+              fontSize: 15,
               paddingLeft: 12,
               paddingRight: 12,
               marginTop: -4,

@@ -1,10 +1,12 @@
 import {List, ListItem} from 'material-ui';
 import Drawer from 'material-ui/Drawer';
 import {typography} from 'material-ui/styles';
-import {blue300, blue600, grey900, white} from 'material-ui/styles/colors';
+import {blue300, blue900, grey300} from 'material-ui/styles/colors';
 import PropTypes from 'prop-types';
 import React from 'react';
-import navigationService from '../../../service/NavigatorService'
+import navigationService from '../../../service/NavigatorService';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+
 
 const styles = {
   logo: {
@@ -12,13 +14,13 @@ const styles = {
     fontSize: 22,
     color: typography.textFullWhite,
     fontWeight: typography.fontWeightLight,
-    backgroundColor: blue600,
+    backgroundColor: blue900,
     paddingLeft: 40,
     paddingTop: 12,
     height: 56,
   },
   menuItem: {
-    color: grey900,
+    color: grey300,
     fontSize: 15
   },
 };
@@ -31,6 +33,7 @@ function getListItem(menu, index, isSubmenu) {
     });
   }
   return <ListItem
+    className={'drawer-list-item'}
     key={index}
     style={styles.menuItem}
     primaryText={menu.text}

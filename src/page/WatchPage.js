@@ -4,9 +4,10 @@ import PageBase from './PageBase';
 import itemService from '../service/ItemService';
 import {loader} from '../component/commons/GlobalLoaderBar';
 import {Divider, RaisedButton} from 'material-ui';
-import {BigPlayButton, Player} from 'video-react';
 import {blue300, blue600} from 'material-ui/styles/colors';
 import AvMovieIcon from 'material-ui/svg-icons/av/movie';
+import {BigPlayButton, Player} from 'video-react';
+import '../../node_modules/video-react/dist/video-react.css';
 
 let SelectableList = makeSelectable(List);
 
@@ -14,9 +15,11 @@ class WatchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: null
+      item: null,
+      videoError: false,
     };
     this.onEpisodeClick.bind(this);
+    this.handlePlayerStateChange.bind(this);
   }
 
   componentDidMount = () => {
@@ -28,7 +31,11 @@ class WatchPage extends React.Component {
     const currentSource = this.state.episode ? this.state.episode.videoSource : '';
     if (prevSource !== currentSource && this.refs.player) {
       console.log('reload video');
+      this.refs.player.subscribeToStateChange(this.handlePlayerStateChange);
       this.refs.player.load();
+      if (this.isFullScreenBeforeLoad && !this.playerState.isFullscreen) {
+        this.refs.player.toggleFullscreen();
+      }
       this.refs.player.play();
     }
   }
@@ -73,7 +80,9 @@ class WatchPage extends React.Component {
       if (!episode.videoSource) {
         if (this.refs.player) {
           this.refs.player.pause();
-          if (this.refs.player.getState().isFullscreen) {
+          if (this.playerState.isFullscreen) {
+            this.isFullScreenBeforeLoad = true;
+            console.log(this.isFullScreenBeforeLoad);
             this.refs.player.toggleFullscreen();
           }
         }
@@ -81,12 +90,24 @@ class WatchPage extends React.Component {
         itemService.crawEpisode(episode).then(episode => {
           this.setCurrentEpisode(episode);
           loader.finish();
-        })
+        });
       } else {
         this.setCurrentEpisode(episode);
       }
     }
   }
+
+  handlePlayerStateChange = (state) => {
+    this.playerState = state;
+  };
+
+  onVideoError = () => {
+    loader.start();
+    itemService.crawEpisode(this.state.episode).then(episode => {
+      this.setCurrentEpisode(episode);
+      loader.finish();
+    })
+  };
 
   setCurrentEpisode(episode) {
     const newEpisodes = this.state.episodes.slice();
@@ -116,10 +137,13 @@ class WatchPage extends React.Component {
       });
     }
 
-    return <PageBase wrapPaper={true}
-                     title={this.getPageTitle()}>
+    return (
+      <PageBase>
       {this.state.item &&
       <div>
+        <h2 style={{fontWeight: 400,}}>{this.state.item.title}</h2>
+        <h4 style={{fontWeight: 400,}}>{this.state.item.subTitle}</h4>
+        <div style={{height: 16}}></div>
         {this.state.videoError &&
         <h4 style={{color: 'crimson', padding: 16}}>Không tìm thấy file video.<br/>Sử dụng chức năng Tải Lại có thể khắc
           phục vấn đề.<br/>Quá trình tải lại có thể mất vài phút.</h4>}
@@ -132,7 +156,6 @@ class WatchPage extends React.Component {
         <Player
           ref={'player'}
           playsInline={true}
-          fluid={true}
           preload={'auto'}
           poster={this.state.item.bigPoster}
           onError={this.onVideoError}
@@ -143,9 +166,9 @@ class WatchPage extends React.Component {
 
         {
           this.state.item.type === 'SERIE' && this.state.episodes.length > 0 &&
-        <SelectableList value={this.state.episode.order}>
-          {episodeItems}
-        </SelectableList>
+          <SelectableList value={this.state.episode.order}>
+            {episodeItems}
+          </SelectableList>
         }
         <div id={'movie-content'}>
           {this.state.item.content}
@@ -176,7 +199,7 @@ class WatchPage extends React.Component {
         </div>
       </div>
       }
-    </PageBase>;
+    </PageBase>);
   }
 }
 

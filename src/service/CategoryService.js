@@ -22,7 +22,7 @@ class CategoryService {
   };
 
   getMoviesByCategory = (category, page, size) => {
-    return api.get(`/category/${category._id}/movie?page=${page}&size=${size}`);
+    return api.get(`/category/${category._id}/items?page=${page}&size=${size}`);
   };
 
   getCategoryByTitle(title) {

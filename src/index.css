@@ -337,3 +337,7 @@ body {
 .search-not-found-message span {
   color: crimson;
 }
+
+.drawer-list-item button svg {
+  color: inherit!important;
+}

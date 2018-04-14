@@ -9,12 +9,11 @@ class CategoryComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [],
+      items: [],
       pageSize: 60,
       category: {},
       paging: {},
     };
-    this.handleItemClick.bind(this);
     this.paginationPageClick.bind(this);
     this.retrieveMovies.bind(this);
   }
@@ -33,19 +32,19 @@ class CategoryComponent extends React.Component {
   retrieveMovies = (categoryKey, page) => {
     loader.start();
     this.setState({
-      movies: []
+      items: []
     });
     const category = categoryService.getCategoryByKey(categoryKey);
     categoryService.getMoviesByCategory(category, page, this.state.pageSize).then(resp => {
-        const movies = resp.movies;
+        const items = resp.items;
         this.setState({
           category: resp.category,
-          movies: movies.docs,
+          items: items.docs,
           paging: {
-            number: movies.page,
-            size: movies.limit,
-            totalPages: movies.pages,
-            totalElements: movies.total
+            number: items.page,
+            size: items.limit,
+            totalPages: items.pages,
+            totalElements: items.total
           },
         });
         loader.finish();
@@ -61,10 +60,10 @@ class CategoryComponent extends React.Component {
     <div id={'category-page-content-grid'}>
       <SectionHeader category={this.state.category}/>
       <div className={'section-content'}>
-        <MovieGridComponent movies={this.state.movies}
+        <MovieGridComponent items={this.state.items}
                             onItemClick={this.handleItemClick}/>
       </div>
-      {this.state.movies.length > 0 && (
+      {this.state.items.length > 0 && (
         <PagingComponent paging={this.state.paging}
                          onPageClick={this.paginationPageClick}/>
       )}

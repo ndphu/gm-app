@@ -9,6 +9,7 @@ import LeftDrawer from './commons/LeftDrawer';
 import staticNav from './nav';
 import ThemeDefault from './theme-default';
 import Web from 'material-ui/svg-icons/av/web';
+import {grey300} from 'material-ui/styles/colors';
 
 class AppLayout extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class AppLayout extends React.Component {
       menus: [
         ...staticNav,
         {
-          text: 'Thể Loại', icon: <Web/>, children: categoryService.getCategories().map(category => ({
+          text: 'Thể Loại', icon: <Web color={grey300}/>, children: categoryService.getCategories().map(category => ({
             text: category.title,
             icon: <Web/>,
             onClick: () => navigationService.goToCategory(category)

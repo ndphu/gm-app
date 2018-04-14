@@ -5,7 +5,6 @@ import CategoryPage from './page/CategoryPage';
 import FilmRequestPage from './page/FilmRequestPage';
 import HomePage from './page/HomePage';
 import SearchPage from './page/SearchPage';
-import SeriePage from './page/SeriePage';
 import WatchPage from './page/WatchPage';
 import ManagePage from './page/ManagePage';
 
@@ -16,7 +15,6 @@ const AppRoutes = () => {
       <Route path={'/home'} component={HomePage}/>
       <Route path={'/category'} component={CategoryPage}/>
       <Route path={'/actor'} component={ActorPage}/>
-      <Route path={'/serie'} component={SeriePage}/>
       <Route path={'/search/q/:query'} component={SearchPage}/>
       <Route exact={true} path={'/filmRequest'} component={FilmRequestPage}/>
       <Route path={'/filmRequest/q/:query'} component={FilmRequestPage}/>

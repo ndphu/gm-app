@@ -8,7 +8,7 @@ class ActorComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [],
+      items: [],
       pageSize: 60,
     };
     this.paginationPageClick.bind(this);

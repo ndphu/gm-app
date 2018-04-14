@@ -15,8 +15,8 @@ const styles = {
     backgroundColor: blue500,
     borderRadius: 2,
     height: 35,
-    marginTop: 11,
-    padding: 4,
+    marginTop: 10,
+    padding: 6,
   },
   inputStyle: {
     color: white,
@@ -49,7 +49,7 @@ class SearchBox extends React.Component {
         </IconButton>
         <TextField
           onKeyPress={this.onSearchKeyPress}
-          hintText="Search..."
+          hintText={'Search...'}
           underlineShow={false}
           fullWidth={true}
           style={styles.textField}

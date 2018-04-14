@@ -1,12 +1,11 @@
 import React from 'react';
 import {loader} from '../component/commons/GlobalLoaderBar';
-import RemoteSearchListItem from '../component/commons/listitem/RemoteSearchListItem';
 import SearchBox from '../component/commons/SearchBox';
 import searchService from '../service/SearchService';
 import PageBase from './PageBase';
 import requestService from '../service/RequestService';
-import {Paper} from 'material-ui';
 import navigatorService from '../service/NavigatorService';
+import SearchResultCard from '../component/commons/SearchResultCard';
 
 const styles = {
   searchBox: {
@@ -36,18 +35,28 @@ class FilmRequestPage extends React.Component {
 
   componentWillReceiveProps = (nextProps) => {
     const newQuery = nextProps.match.params.query;
-    if (newQuery && newQuery !== this.state.query) {
+    if (newQuery && newQuery !== this.props.match.params.query) {
       this.performRemoteSearch(newQuery);
     }
   };
 
   onSearchItemClick = (item) => {
-    loader.start();
-    requestService.request(item.link, item.poster).then((resp) => {
-        loader.finish();
-        navigatorService.goToItem(resp);
-      }
-    );
+    if (item.itemId) {
+      navigatorService.goToItem({_id: item.itemId});
+    } else {
+      loader.start();
+      requestService.request(item.link, item.poster).then((resp) => {
+          loader.finish();
+          this.state.result.filter(i => i.link === resp.source).forEach(item => {
+            item.itemId = resp._id;
+          });
+          this.setState({
+              result: this.state.result
+            }
+          );
+        }
+      );
+    }
   };
 
   performRemoteSearch = (query) => {
@@ -62,12 +71,11 @@ class FilmRequestPage extends React.Component {
   };
 
   getSearchResultItems = () => {
-    return this.state.result.map((item, idx, array) => (
-      <RemoteSearchListItem
+    return this.state.result.map((item) => (
+      <SearchResultCard
+        key={`search-item-${item.link}`}
         item={item}
-        isLast={idx === array.length - 1}
-        onItemClick={this.onSearchItemClick}
-        key={`remote-search-result-${idx}`}
+        onClick={this.onSearchItemClick}
       />
     ))
   };
@@ -76,13 +84,15 @@ class FilmRequestPage extends React.Component {
     const items = this.getSearchResultItems();
 
     return (
-      <PageBase title="Tìm Phim">
+      <PageBase title='Thêm Phim Mới'>
         <div>
           <SearchBox onSearchSubmit={this.onSearchSubmit}
                      query={this.state.query}/>
-          <Paper style={{marginTop: 16}}>
-            {items}
-          </Paper>
+          <div style={{marginTop: 32}}>
+            <div className={'grid-wrapper'}>
+              {items}
+            </div>
+          </div>
         </div>
       </PageBase>
     );

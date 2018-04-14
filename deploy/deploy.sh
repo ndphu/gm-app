@@ -1,4 +1,10 @@
 #!/bin/sh
+cd ..
+rm -rf ./build
+
+npm run build
+
+cd deploy
 
 rm -rf ./build
 cp -r ../build ./

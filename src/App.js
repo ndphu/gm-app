@@ -1,14 +1,7 @@
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, {Component} from 'react';
-import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
-import ActorPage from './page/ActorPage';
-import CategoryPage from './page/CategoryPage';
-import HomeComponent from './page/HomePage';
+import {HashRouter, Route} from 'react-router-dom'
 import AppLayout from './component/layout/AppLayout';
-import MovieComponent from './component/movie/MovieComponent';
-import SearchPage from './page/SearchPage';
-import SeriePage from './page/SeriePage';
-import WatchSerieComponent from './component/serie/WatchSerieComponent';
 import AppRoutes from './routes';
 import categoryService from './service/CategoryService';
 import navigatorService from './service/NavigatorService';

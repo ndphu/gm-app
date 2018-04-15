@@ -8,6 +8,8 @@ import {blue300, blue600} from 'material-ui/styles/colors';
 import AvMovieIcon from 'material-ui/svg-icons/av/movie';
 import {BigPlayButton, Player} from 'video-react';
 import '../../node_modules/video-react/dist/video-react.css';
+import navigatorService from '../service/NavigatorService';
+import categoryService from '../service/GenreService';
 
 let SelectableList = makeSelectable(List);
 
@@ -19,7 +21,8 @@ class WatchPage extends React.Component {
       videoError: false,
     };
     this.onEpisodeClick.bind(this);
-    this.handlePlayerStateChange.bind(this);
+    this.handleCategoryClick.bind(this);
+    this.handleActorClick.bind(this);
   }
 
   componentDidMount = () => {
@@ -30,17 +33,23 @@ class WatchPage extends React.Component {
     const prevSource = prevState.episode ? prevState.episode.videoSource : '';
     const currentSource = this.state.episode ? this.state.episode.videoSource : '';
     if (prevSource !== currentSource && this.refs.player) {
-      console.log('reload video');
-      this.refs.player.subscribeToStateChange(this.handlePlayerStateChange);
       this.refs.player.load();
-      if (this.isFullScreenBeforeLoad && !this.playerState.isFullscreen) {
-        this.refs.player.toggleFullscreen();
-      }
       this.refs.player.play();
     }
   }
 
   componentWillUnmount = () => {
+    if (this.refs.player) {
+      this.refs.player.pause();
+    }
+  };
+
+  handleCategoryClick = (genre) => {
+    navigatorService.goToCategory(categoryService.getGenreByTitle(genre));
+  };
+
+  handleActorClick = (actor) => {
+    navigatorService.goToActor({key:actor.convertToKey()});
   };
 
   getItem = (itemId) => {
@@ -61,7 +70,6 @@ class WatchPage extends React.Component {
 
   getVideoSource = () => {
     const source = this.state.episode ? this.state.episode.videoSource : '';
-    console.log(source);
     return source;
   };
 
@@ -80,11 +88,6 @@ class WatchPage extends React.Component {
       if (!episode.videoSource) {
         if (this.refs.player) {
           this.refs.player.pause();
-          if (this.playerState.isFullscreen) {
-            this.isFullScreenBeforeLoad = true;
-            console.log(this.isFullScreenBeforeLoad);
-            this.refs.player.toggleFullscreen();
-          }
         }
         loader.start();
         itemService.crawEpisode(episode).then(episode => {
@@ -96,10 +99,6 @@ class WatchPage extends React.Component {
       }
     }
   }
-
-  handlePlayerStateChange = (state) => {
-    this.playerState = state;
-  };
 
   onVideoError = () => {
     loader.start();
@@ -143,7 +142,7 @@ class WatchPage extends React.Component {
       <div>
         <h2 style={{fontWeight: 400,}}>{this.state.item.title}</h2>
         <h4 style={{fontWeight: 400,}}>{this.state.item.subTitle}</h4>
-        <div style={{height: 16}}></div>
+        <div style={{height: 16}}/>
         {this.state.videoError &&
         <h4 style={{color: 'crimson', padding: 16}}>Không tìm thấy file video.<br/>Sử dụng chức năng Tải Lại có thể khắc
           phục vấn đề.<br/>Quá trình tải lại có thể mất vài phút.</h4>}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Divider} from 'material-ui';
 import navigatorService from '../../../service/NavigatorService';
-import categoryService from '../../../service/CategoryService';
+import categoryService from '../../../service/GenreService';
 
 class MovieListItem extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class MovieListItem extends React.Component {
         <span className={'list-item-movie-category'}>{this.props.movie.categories.map((category, idx) =>
           <a key={'list-item-movie-category-' + this.props.movie._id + '-' + category}
              onClick={() =>
-               navigatorService.goToCategory(categoryService.getCategoryByTitle(category))}>
+               navigatorService.goToCategory(categoryService.getGenreByTitle(category))}>
             {category + (idx < this.props.movie.categories.length - 1 ? ',' : '')}
           </a>
         )}</span>

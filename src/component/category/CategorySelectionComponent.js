@@ -1,6 +1,6 @@
 import {Drawer, MenuItem, RaisedButton} from 'material-ui';
 import React from 'react';
-import categoryService from '../../service/CategoryService';
+import categoryService from '../../service/GenreService';
 
 
 class CategorySelectionComponent extends React.Component {
@@ -28,7 +28,7 @@ class CategorySelectionComponent extends React.Component {
 
   retrieveCategories = () => {
     if (this.state.categories.length === 0) {
-      categoryService.getCategories().then(categories => {
+      categoryService.getGenres().then(categories => {
         categories.content.sort(function (c1, c2) {
           if (c1.key < c2.key) {
             return -1;

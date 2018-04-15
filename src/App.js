@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 import {HashRouter, Route} from 'react-router-dom'
 import AppLayout from './component/layout/AppLayout';
 import AppRoutes from './routes';
-import categoryService from './service/CategoryService';
+import categoryService from './service/GenreService';
 import navigatorService from './service/NavigatorService';
+require('./utils/StringUtils');
 
 class App extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class App extends Component {
   }
   
   componentDidMount = () => {
-    categoryService.fetchCategory().then(resp => {
-      categoryService.setCategories(resp.docs);
+    categoryService.fetchGenres().then(resp => {
+      categoryService.setGenres(resp.docs);
       let loadScreen = document.getElementById('load-screen');
       loadScreen.style.display = 'none';
       loadScreen.style.visibility = 'hidden';

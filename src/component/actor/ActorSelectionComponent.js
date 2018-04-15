@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Grid, Row} from 'react-bootstrap';
 import {DropDownMenu, MenuItem} from 'material-ui';
-import categoryService from '../../service/CategoryService';
+import categoryService from '../../service/GenreService';
 import actorService from '../../service/ActorService';
 
 

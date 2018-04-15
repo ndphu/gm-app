@@ -32,16 +32,16 @@ class ActorComponent extends React.Component {
       movies: []
     });
     actorService.getActorByKey(actorKey).then(actor => {
-        actorService.getMoviesByActor(actor, page, this.state.pageSize).then(resp => {
-          const movies = resp.movies;
+        actorService.getItemsByActor(actor, page, this.state.pageSize).then(resp => {
+          const items = resp.items;
           this.setState({
             actor: resp.actor,
-            movies: movies.docs,
+            items: items.docs,
             paging: {
-              number: movies.page,
-              size: movies.limit,
-              totalPages: movies.pages,
-              totalElements: movies.total
+              number: items.page,
+              size: items.limit,
+              totalPages: items.pages,
+              totalElements: items.total
             },
           });
           loader.finish();
@@ -57,8 +57,8 @@ class ActorComponent extends React.Component {
   
   render = () => (
     <div>
-      <MovieGridComponent movies={this.state.movies} onItemClick={this.handleItemClick}/>
-      {this.state.movies.length > 0 && (
+      <MovieGridComponent items={this.state.items} onItemClick={this.handleItemClick}/>
+      {this.state.items.length > 0 && (
         <PagingComponent paging={this.state.paging}
                          onPageClick={this.paginationPageClick}/>
       )}

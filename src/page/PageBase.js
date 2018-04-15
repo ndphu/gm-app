@@ -34,7 +34,7 @@ const PageBase = (props) => {
 };
 
 PageBase.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.element,
   navigation: PropTypes.string,
   children: PropTypes.element,
   wrapPaper: PropTypes.bool,

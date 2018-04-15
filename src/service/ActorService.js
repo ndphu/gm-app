@@ -9,8 +9,8 @@ class ActorService {
     return api.get(`/actor/byKey/${key}`);
   };
   
-  getMoviesByActor = (actor, page, size) => {
-    return api.get(`/actor/${actor._id}/movie?page=${page}&size=${size}`);
+  getItemsByActor = (actor, page, size) => {
+    return api.get(`/actor/${actor._id}/items?page=${page}&size=${size}`);
   };
 }
 

@@ -53,7 +53,8 @@ class HomePage extends React.Component {
     <div>
       {this.state.sections.map(section => (
         <div className={'section-container'} key={'home-section-' + section.category.key}>
-          <SectionHeader onClick={this.handleSectionHeaderClick} category={section.category}/>
+          <SectionHeader
+            title={section.category.title}/>
           <div className={'section-content'}>
             <MovieGridComponent items={section.items}
                                 onItemClick={this.handleItemClick}/>

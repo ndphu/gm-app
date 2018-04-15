@@ -2,7 +2,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import PropTypes from 'prop-types';
 import React from 'react';
-import categoryService from '../../service/CategoryService';
+import genreService from '../../service/GenreService';
 import navigationService from '../../service/NavigatorService';
 import Header from './commons/Header';
 import LeftDrawer from './commons/LeftDrawer';
@@ -24,7 +24,7 @@ class AppLayout extends React.Component {
       menus: [
         ...staticNav,
         {
-          text: 'Thể Loại', icon: <Web color={grey300}/>, children: categoryService.getCategories().map(category => ({
+          text: 'Thể Loại', icon: <Web color={grey300}/>, children: genreService.getGenres().map(category => ({
             text: category.title,
             icon: <Web/>,
             onClick: () => navigationService.goToCategory(category)
@@ -48,7 +48,6 @@ class AppLayout extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     let {navDrawerOpen} = this.state;
     const paddingLeftDrawerOpen = ThemeDefault.drawer.width + 6;
 

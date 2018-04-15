@@ -5,7 +5,7 @@ import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import {red200} from "material-ui/styles/colors";
 import PlayCircleOutline from 'material-ui/svg-icons/av/play-circle-outline'
 import {OverlayTrigger, Tooltip} from 'react-bootstrap';
-import categoryService from '../../service/CategoryService';
+import categoryService from '../../service/GenreService';
 import navigatorService from '../../service/NavigatorService';
 
 const coverWidth = 160;
@@ -82,7 +82,7 @@ class MovieCard extends React.Component {
   };
 
   handleCategoryClick = () => {
-    navigatorService.goToCategory(categoryService.getCategoryByTitle(this.props.item.genres[0]));
+    navigatorService.goToCategory(categoryService.getGenreByTitle(this.props.item.genres[0]));
   };
 
   onMouseEnter = () => {

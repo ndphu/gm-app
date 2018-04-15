@@ -1,5 +1,5 @@
 import React from 'react';
-import categoryService from '../../service/CategoryService';
+import categoryService from '../../service/GenreService';
 import {loader} from '../commons/GlobalLoaderBar';
 import MovieGridComponent from '../commons/MovieGridComponent';
 import PagingComponent from '../commons/PagingComponent';

@@ -7,12 +7,6 @@ import requestService from '../service/RequestService';
 import navigatorService from '../service/NavigatorService';
 import SearchResultCard from '../component/commons/SearchResultCard';
 
-const styles = {
-  searchBox: {
-    marginBottom: 16
-  }
-};
-
 class FilmRequestPage extends React.Component {
   constructor(props) {
     super(props);

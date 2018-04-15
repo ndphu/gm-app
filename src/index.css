@@ -60,53 +60,6 @@ body {
   cursor: pointer;
 }
 
-.list-item-remote-search-container {
-  position: relative;
-  padding: 4px 8px;
-}
-
-.list-item-remote-search-container .item-poster {
-  background-size: cover;
-  max-width: 170px;
-  min-width: 170px;
-  max-height: 240px;
-  min-height: 240px;
-  cursor: pointer;
-  margin: 4px 0;
-  position: relative;
-}
-
-.list-item-remote-search-container div {
-  display: inline-block;
-  position: absolute;
-  padding: 4px 8px;
-}
-
-
-.list-item-remote-search-container div > a {
-  display: block;
-}
-
-.list-item-remote-search-container a,span {
-  padding: 2px;
-  color: #616161;
-  max-height: 48px;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.list-item-remote-search-title {
-  font-size: 18px;
-}
-
-.list-item-remote-search-subtitle {
-  font-size: 15px;
-}
-
-.list-item-remote-search-container hr {
-  margin-left: 230px!important;
-}
-
 .cardview-movie-poster img {
   min-width: 160px;
   max-width: 100%;
@@ -306,7 +259,7 @@ body {
   color: #616161;
 }
 
-.section-header-container a {
+.section-header-container > a {
   cursor: pointer;
   color: #616161!important;
 }
@@ -340,4 +293,8 @@ body {
 
 .drawer-list-item button svg {
   color: inherit!important;
+}
+
+.video-react {
+  outline: transparent !important;
 }

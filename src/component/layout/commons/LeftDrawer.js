@@ -5,7 +5,6 @@ import {blue300, blue900, grey300} from 'material-ui/styles/colors';
 import PropTypes from 'prop-types';
 import React from 'react';
 import navigationService from '../../../service/NavigatorService';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 
 const styles = {
@@ -65,7 +64,6 @@ class LeftDrawer extends React.Component {
   };
 
   componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps);
     if (nextProps.navDrawerOpen !== this.state.navDrawerOpen) {
       this.setState({
         navDrawerOpen: nextProps.navDrawerOpen,

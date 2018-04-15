@@ -2,7 +2,7 @@ class NavigatorService {
   setHistory(history) {
     this.history = history;
   }
-  
+
   goToMovie = (movie) => {
     this.history.push(`/watch/${movie._id}`)
   };
@@ -14,17 +14,12 @@ class NavigatorService {
     this.history.push(`/category/${category.key}/page/${page}`);
   };
   
-  goToSerie = (serie) => {
-    this.history.push(`/watch/serie/${serie._id}`)
-  };
-  
   goToActor(actor) {
     this.history.push(`/actor/${actor.key}/page/1`)
   };
 
   goToSearch(query) {
     this.history.push(`/search/q/${query}`);
-
   }
 
   goToHome() {

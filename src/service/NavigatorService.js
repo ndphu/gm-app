@@ -11,7 +11,7 @@ class NavigatorService {
     if (!page) {
       page = 1;
     }
-    this.history.push(`/category/${category.key}/page/${page}`);
+    this.history.push(`/genre/${category.key}/page/${page}`);
   };
   
   goToActor(actor) {

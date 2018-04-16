@@ -13,7 +13,7 @@ const PageBase = (props) => {
       {navigation && <span style={globalStyles.navigation}>{navigation}</span>}
       {wrapPaper &&
       <Paper style={globalStyles.paper}>
-        <h3 style={globalStyles.title}>{title}</h3>
+        {props.titleElement ? props.titleElement : <h3 style={globalStyles.title}>{title}</h3>}
         
         <Divider/>
         {props.children}
@@ -24,7 +24,7 @@ const PageBase = (props) => {
       }
       {!wrapPaper &&
       <div>
-        <h3 style={globalStyles.title}>{title}</h3>
+        {props.titleElement ? props.titleElement : <h3 style={globalStyles.title}>{title}</h3>}
         {props.children}
         <div style={globalStyles.clear}/>
       </div>
@@ -34,7 +34,8 @@ const PageBase = (props) => {
 };
 
 PageBase.propTypes = {
-  title: PropTypes.element,
+  title: PropTypes.string,
+  titleElement: PropTypes.element,
   navigation: PropTypes.string,
   children: PropTypes.element,
   wrapPaper: PropTypes.bool,

@@ -21,12 +21,17 @@ class GenreService {
     this.genres = genres;
   };
 
-  getMoviesByCategory = (genre, page, size) => {
+  getGenreItems = (genre, page, size) => {
     return api.get(`/genre/${genre._id}/items?page=${page}&size=${size}`);
   };
 
   getGenreByTitle = (title) => {
     return this.genres.filter(genre => genre.title === title)[0];
+  };
+  
+  getGenreByKey = (key) => {
+    console.log(key);
+    return this.genres.filter(genre => genre.key === key)[0];
   }
 }
 

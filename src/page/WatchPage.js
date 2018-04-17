@@ -10,6 +10,7 @@ import {BigPlayButton, Player} from 'video-react';
 import '../../node_modules/video-react/dist/video-react.css';
 import navigatorService from '../service/NavigatorService';
 import categoryService from '../service/GenreService';
+import apiConfig from '../config/Config';
 
 let SelectableList = makeSelectable(List);
 
@@ -49,7 +50,7 @@ class WatchPage extends React.Component {
   };
 
   handleActorClick = (actor) => {
-    navigatorService.goToActor({key:actor.convertToKey()});
+    navigatorService.goToActor({key: actor.convertToKey()});
   };
 
   getItem = (itemId) => {
@@ -138,67 +139,71 @@ class WatchPage extends React.Component {
 
     return (
       <PageBase>
-      {this.state.item &&
-      <div>
-        <h2 style={{fontWeight: 400,}}>{this.state.item.title}</h2>
-        <h4 style={{fontWeight: 400,}}>{this.state.item.subTitle}</h4>
-        <div style={{height: 16}}/>
-        {this.state.videoError &&
-        <h4 style={{color: 'crimson', padding: 16}}>Không tìm thấy file video.<br/>Sử dụng chức năng Tải Lại có thể khắc
-          phục vấn đề.<br/>Quá trình tải lại có thể mất vài phút.</h4>}
-        {this.state.videoError &&
-        <RaisedButton primary={true}
-                      label="Tải Lại"
-                      onClick={this.reloadVideo}
-                      style={{marginLeft: 16}}/>}
-        {!this.state.videoError &&
-        <Player
-          ref={'player'}
-          playsInline={true}
-          preload={'auto'}
-          poster={this.state.item.bigPoster}
-          onError={this.onVideoError}
-          onEnded={this.onVideoEnded}
-          src={this.getVideoSource()}>
-          <BigPlayButton position="center"/>
-        </Player>}
+        {this.state.item &&
+        <div>
+          <h2 style={{fontWeight: 400,}}>{this.state.item.title}</h2>
+          <h4 style={{fontWeight: 400,}}>{this.state.item.subTitle}</h4>
+          <div style={{height: 16}}/>
+          {this.state.videoError &&
+          <h4 style={{color: 'crimson', padding: 16}}>Không tìm thấy file video.<br/>Sử dụng chức năng Tải Lại có thể
+            khắc
+            phục vấn đề.<br/>Quá trình tải lại có thể mất vài phút.</h4>}
+          {this.state.videoError &&
+          <RaisedButton primary={true}
+                        label="Tải Lại"
+                        onClick={this.reloadVideo}
+                        style={{marginLeft: 16}}/>}
+          {!this.state.videoError &&
+          <Player
+            ref={'player'}
+            playsInline={true}
+            preload={'auto'}
+            poster={this.state.item.bigPoster}
+            onError={this.onVideoError}
+            onEnded={this.onVideoEnded}
+            src={this.getVideoSource()}>
+            {this.state.episode && this.state.episode.srt &&
+              <track src={`${apiConfig.baseUrl}/item/${this.state.episode._id}/srt`} default/>
+            }
+            <BigPlayButton position="center"/>
+          </Player>}
 
-        {
-          this.state.item.type === 'SERIE' && this.state.episodes.length > 0 &&
-          <SelectableList value={this.state.episode.order}>
-            {episodeItems}
-          </SelectableList>
-        }
-        <div id={'movie-content'}>
-          {this.state.item.content}
-        </div>
-        <Divider className={'movie-divider'}/>
-        <div id={'movie-content'} className={['grid-wrapper-2-cols']}>
-          <div>
-            <h4>Diễn Viên</h4>
-            {this.state.item.actors.map((a, i) => (
-              <span key={'film-details-actor-' + a}>
+          {
+            this.state.item.type === 'SERIE' && this.state.episodes.length > 0 &&
+            <SelectableList value={this.state.episode.order}>
+              {episodeItems}
+            </SelectableList>
+          }
+          <div id={'movie-content'}>
+            {this.state.item.content}
+          </div>
+          <Divider className={'movie-divider'}/>
+          <div id={'movie-content'} className={['grid-wrapper-2-cols']}>
+            <div>
+              <h4>Diễn Viên</h4>
+              {this.state.item.actors.map((a, i) => (
+                <span key={'film-details-actor-' + a}>
                 <a onClick={() => this.handleActorClick(a)}
                    style={{color: '#0645AD'}}>{a}</a>
-                {i !== this.state.item.actors.length - 1 ? ', ' : ''}
+                  {i !== this.state.item.actors.length - 1 ? ', ' : ''}
                 </span>
-            ))}
-          </div>
-          <div>
-            <h4>Thể Loại</h4>
-            {this.state.item.genres.map((genre, i, arr) => (
-              <span key={'film-details-genre-' + genre}>
+              ))}
+            </div>
+            <div>
+              <h4>Thể Loại</h4>
+              {this.state.item.genres.map((genre, i, arr) => (
+                <span key={'film-details-genre-' + genre}>
                 <a onClick={() => this.handleCategoryClick(genre)}
                    style={{color: '#0645AD'}}>{genre}</a>
-                {i < arr.length - 1 ? ', ' : ''}
+                  {i < arr.length - 1 ? ', ' : ''}
                 </span>
-            ))
-            }
+              ))
+              }
+            </div>
           </div>
         </div>
-      </div>
-      }
-    </PageBase>);
+        }
+      </PageBase>);
   }
 }
 

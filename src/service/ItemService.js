@@ -94,6 +94,10 @@ class ItemService {
   crawEpisode = (episode) => {
     return api.get(`/episode/${episode._id}/reload`);
   };
+  
+  reloadEpisodeList = (item) => {
+    return api.get(`/item/${item._id}/reloadEpisodeList`);
+  };
 }
 
 const itemService = new ItemService();

@@ -56,9 +56,20 @@ class WatchPage extends React.Component {
   
   getItem = (itemId) => {
     loader.start();
-    itemService.getById(itemId).then((result) => {
-      this.setState(result);
+    Promise.all([itemService.getItemById(itemId), itemService.getItemEpisodes(itemId)]).then(result => {
+      let item = result[0];
+      let episodes = result[1];
+      let firstEpisode = (episodes && episodes.length) ? episodes[0] : null;
+      let videoError = !firstEpisode || !firstEpisode.videoSource;
+      this.setState({
+        item: item,
+        episodes: episodes,
+        episode: (episodes && episodes.length) ? episodes[0] : null,
+      });
       loader.finish();
+      if (videoError) {
+        this.onVideoError();
+      }
     });
   };
   
@@ -96,11 +107,54 @@ class WatchPage extends React.Component {
   }
   
   onVideoError = () => {
-    loader.start();
-    itemService.crawEpisode(this.state.episode).then(episode => {
-      this.setCurrentEpisode(episode);
-      loader.finish();
-    })
+    this.setState({
+      videoError: true
+    });
+    if (this.loading) return;
+    
+    if (this.state.episode) {
+      this.loading = true;
+      itemService.crawEpisode(this.state.episode).then(episode => {
+        this.loading = false;
+        this.setState({
+          videoError: false,
+        });
+        this.setCurrentEpisode(episode);
+      });
+    } else {
+      if (!this.state.episodes || this.state.episodes.length === 0) {
+        this.loading = true;
+        itemService.reload(this.state.item).then(item => {
+          itemService.getItemEpisodes(item._id).then(episodes => {
+            this.loading = false;
+            if (episodes.length === 0) {
+            
+            } else {
+              this.setState({
+                episodes: episodes,
+                episode: episodes[0],
+                videoError: false,
+              });
+            }
+          });
+        });
+      } else {
+        this.loading = true;
+        itemService.reloadEpisodeList(this.state.item).then(episodes => {
+            this.loading = false;
+            if (episodes.length === 0) {
+            
+            } else {
+              this.setState({
+                episodes: episodes,
+                episode: episodes[0],
+                videoError: false,
+              });
+            }
+          }
+        );
+      }
+    }
   };
   
   handleReloadEpisodeList = () => {
@@ -146,17 +200,9 @@ class WatchPage extends React.Component {
         <div>
           <h2 style={{fontWeight: 400,}}>{this.state.item.title}</h2>
           <h4 style={{fontWeight: 400,}}>{this.state.item.subTitle}</h4>
-          <div style={{height: 16}}/>
-          {this.state.videoError &&
-          <h4 style={{color: 'crimson', padding: 16}}>Không tìm thấy file video.<br/>Sử dụng chức năng Tải Lại có thể
-            khắc
-            phục vấn đề.<br/>Quá trình tải lại có thể mất vài phút.</h4>}
-          {this.state.videoError &&
-          <RaisedButton primary={true}
-                        label="Tải Lại"
-                        onClick={this.reloadVideo}
-                        style={{marginLeft: 16}}/>}
-          {!this.state.videoError &&
+          {this.state.videoError ?
+            <h4 style={{color: 'crimson', padding: 16}}>Đang tải video... Đợi chút nha...</h4> :
+            <div style={{height: 16}}/>}
           <Player
             ref={'player'}
             playsInline={true}
@@ -165,15 +211,18 @@ class WatchPage extends React.Component {
             onError={this.onVideoError}
             onEnded={this.onVideoEnded}
             src={this.getVideoSource()}>
-          {this.state.episode && this.state.episode.srt &&
-          <track src={`${apiConfig.baseUrl}/item/${this.state.episode._id}/srt`} default/>
-          }
-          <BigPlayButton position="center"/>
-        </Player>}
+            {this.state.episode && this.state.episode.srt &&
+            <track src={`${apiConfig.baseUrl}/item/${this.state.episode._id}/srt`} default/>
+            }
+            <BigPlayButton position="center"/>
+          </Player>
           {
-            this.state.item.type === 'SERIE' && this.state.episodes.length > 0 &&
+            this.state.item.type === 'SERIE'
+            && this.state.episodes
+            && this.state.episodes.length > 0
+            &&
             <SelectableList
-              value={this.state.episode.order}
+              value={this.state.episode ? this.state.episode.order : -1}
             >
               {episodeItems}
             </SelectableList>

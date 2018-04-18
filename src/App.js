@@ -1,10 +1,10 @@
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, {Component} from 'react';
 import {HashRouter, Route} from 'react-router-dom'
-import AppLayout from './component/layout/AppLayout';
 import AppRoutes from './AppRoutes';
+import AppLayout from './component/layout/AppLayout';
 import categoryService from './service/GenreService';
 import navigatorService from './service/NavigatorService';
+
 require('./utils/StringUtils');
 
 class App extends Component {

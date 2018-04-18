@@ -201,7 +201,7 @@ class WatchPage extends React.Component {
           <h2 style={{fontWeight: 400,}}>{this.state.item.title}</h2>
           <h4 style={{fontWeight: 400,}}>{this.state.item.subTitle}</h4>
           {this.state.videoError ?
-            <h4 style={{color: 'crimson', padding: 16}}>Đang tải video... Đợi chút nha...</h4> :
+            <h4 style={{color: 'crimson', paddingTop: 16, paddingBottom: 16}}>Đang tải video... Đợi chút nha...</h4> :
             <div style={{height: 16}}/>}
           <Player
             ref={'player'}

@@ -45,8 +45,8 @@ class SearchPage extends React.Component {
   
   render = () => (
     <PageBase
-      titleElement={<h3 style={globalStyles.title}>Kết quả tìm kiếm bởi từ khóa <b
-        style={{color: 'crimson'}}>{this.state.query}</b></h3>}>
+      titleElement={<h3 style={globalStyles.title}>Kết quả tìm kiếm bởi từ khóa <span
+        style={{color: 'crimson'}}>{this.state.query}</span></h3>}>
       <div>
         {this.state.notFound && (
           <div className={['search-not-found-message']}>

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import {white, blue500} from 'material-ui/styles/colors';
@@ -49,7 +50,7 @@ class SearchBox extends React.Component {
         </IconButton>
         <TextField
           onKeyPress={this.onSearchKeyPress}
-          hintText={'Search...'}
+          hintText={this.props.searchHint}
           underlineShow={false}
           fullWidth={true}
           style={styles.textField}
@@ -60,6 +61,13 @@ class SearchBox extends React.Component {
     );
   }
 }
+
+
+SearchBox.propTypes = {
+  searchHint: PropTypes.string,
+  onSearchSubmit: PropTypes.func,
+};
+
 
 
 export default SearchBox;

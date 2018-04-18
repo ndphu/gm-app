@@ -81,7 +81,8 @@ class FilmRequestPage extends React.Component {
       <PageBase title='Thêm Phim Mới'>
         <div>
           <SearchBox onSearchSubmit={this.onSearchSubmit}
-                     query={this.state.query}/>
+                     query={this.state.query}
+                     searchHint={'Tìm theo tên phim'}/>
           <div style={{marginTop: 32}}>
             <div className={'grid-wrapper'}>
               {items}

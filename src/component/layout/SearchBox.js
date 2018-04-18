@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import {white, blue500} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import Search from 'material-ui/svg-icons/action/search';
-import navigatorService from '../../../service/NavigatorService';
+import navigatorService from '../../service/NavigatorService';
 
 const styles = {
   iconButton: {

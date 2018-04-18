@@ -2,7 +2,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, {Component} from 'react';
 import {HashRouter, Route} from 'react-router-dom'
 import AppLayout from './component/layout/AppLayout';
-import AppRoutes from './routes';
+import AppRoutes from './AppRoutes';
 import categoryService from './service/GenreService';
 import navigatorService from './service/NavigatorService';
 require('./utils/StringUtils');
@@ -31,15 +31,13 @@ class App extends Component {
     return (
       <div>
         {this.state.ready &&
-        <MuiThemeProvider>
           <HashRouter>
             <Route path={'/'} render={(props) => {
               navigatorService.setLocation(props.location);
               navigatorService.setHistory(props.history);
               return <AppLayout children={<AppRoutes/>}/>
             }}/>
-          </HashRouter>
-        </MuiThemeProvider>}
+          </HashRouter>}
       </div>
     );
   }

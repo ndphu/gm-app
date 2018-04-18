@@ -4,7 +4,7 @@ import {typography} from 'material-ui/styles';
 import {blue300, blue900, grey300} from 'material-ui/styles/colors';
 import PropTypes from 'prop-types';
 import React from 'react';
-import navigationService from '../../../service/NavigatorService';
+import navigationService from '../../service/NavigatorService';
 
 
 const styles = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import navigationService from '../../service/NavigatorService';
+import navigationService from './service/NavigatorService';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import {grey300} from 'material-ui/styles/colors';

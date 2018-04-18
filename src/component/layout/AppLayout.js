@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import genreService from '../../service/GenreService';
 import navigationService from '../../service/NavigatorService';
-import Header from './commons/Header';
-import LeftDrawer from './commons/LeftDrawer';
-import staticNav from './nav';
-import ThemeDefault from './theme-default';
+import Header from './Header';
+import LeftDrawer from './LeftDrawer';
+import staticNav from '../../AppStaticNav';
+import ThemeDefault from '../../Theme';
 import Web from 'material-ui/svg-icons/av/web';
 import {grey300} from 'material-ui/styles/colors';
 

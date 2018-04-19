@@ -298,3 +298,11 @@ body {
 .video-react {
   outline: transparent !important;
 }
+
+.grid-wrapper-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px);
+  grid-gap: 8px;
+  align-items: left;
+  justify-content: left;
+}

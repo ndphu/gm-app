@@ -1,6 +1,7 @@
 import React from 'react';
 import {loader} from '../component/commons/GlobalLoaderBar';
 import MovieGridComponent from '../component/commons/MovieGridComponent';
+import MovieItem from '../component/commons/MovieItem';
 import PagingComponent from '../component/commons/PagingComponent';
 import genreSerivce from '../service/GenreService';
 import PageBase from './PageBase';
@@ -59,8 +60,14 @@ class GenrePage extends React.Component {
   render = () => (
     <PageBase title={this.state.genre ? this.state.genre.title : ''}>
       <div>
-        <MovieGridComponent items={this.state.items}
-                            onItemClick={this.handleItemClick}/>
+        {/*<MovieGridComponent items={this.state.items}*/}
+        {/*onItemClick={this.handleItemClick}/>*/}
+        <div className={'grid-wrapper-2'}>
+          {this.state.items.map(item => (
+            <MovieItem
+              key={`key-item-${item._id}`}
+              item={item}/>))}
+        </div>
         {this.state.items.length > 0 && (
           <PagingComponent paging={this.state.paging}
                            onPageClick={this.paginationPageClick}/>

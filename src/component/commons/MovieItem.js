@@ -7,9 +7,9 @@ class MovieItem extends React.Component {
     const item = this.props.item;
     return (
       <Paper className={'c-movie-item-container'}>
-        <img className={'c-movie-item-cover'} src={item.poster}/>
-        <p className={'c-movie-item-title'}>{item.title}</p>
-        <p className={'c-movie-item-subtitle'}>{item.subTitle}</p>
+        <img className={'c-movie-item-poster'} src={item.poster}/>
+        <span className={'c-movie-item-title'}>{item.title}</span>
+        <span className={'c-movie-item-subtitle'}>{item.subTitle}</span>
       </Paper>
     )
   }

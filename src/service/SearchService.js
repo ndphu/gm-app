@@ -6,8 +6,8 @@ class SearchService {
     return api.get(`/search/q/${query}?page=${page}&size=${size}`);
   };
   
-  remoteSearch(query) {
-    return api.get(`/search/remote/q/${query}`);
+  remoteSearch(query, source) {
+    return api.get(`/search/remote/q/${query}?source=${source ? source : 0}`);
   }
 }
 

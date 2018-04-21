@@ -6,12 +6,14 @@ import PageBase from './PageBase';
 import requestService from '../service/RequestService';
 import navigatorService from '../service/NavigatorService';
 import SearchResultCard from '../component/commons/SearchResultCard';
+import {RadioButton, RadioButtonGroup} from 'material-ui';
 
 class FilmRequestPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       result: [],
+      source: "0",
     };
   }
 
@@ -55,7 +57,7 @@ class FilmRequestPage extends React.Component {
 
   performRemoteSearch = (query) => {
     loader.start();
-    searchService.remoteSearch(query).then(result => {
+    searchService.remoteSearch(query, this.state.source).then(result => {
       this.setState({
         result: result,
         query: query,
@@ -74,6 +76,12 @@ class FilmRequestPage extends React.Component {
     ))
   };
 
+  onSourceChange = (event, value) => {
+    this.setState({
+      source: value,
+    })
+  };
+
   render = () => {
     const items = this.getSearchResultItems();
 
@@ -83,6 +91,22 @@ class FilmRequestPage extends React.Component {
           <SearchBox onSearchSubmit={this.onSearchSubmit}
                      query={this.state.query}
                      searchHint={'Tìm theo tên phim'}/>
+          <RadioButtonGroup defaultSelected="0"
+                            style={{marginTop: 16}}
+                            onChange={this.onSourceChange}>
+            <RadioButton
+              value="0"
+              label="VungTV"
+              style={{marginBottom: 16}}
+              labelStyle={{fontWeight: 400}}
+            />
+            <RadioButton
+              value="1"
+              label="BanhTV"
+              style={{marginBottom: 16}}
+              labelStyle={{fontWeight: 400}}
+            />
+          </RadioButtonGroup>
           <div style={{marginTop: 32}}>
             <div className={'grid-wrapper'}>
               {items}

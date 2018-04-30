@@ -203,6 +203,35 @@
         s.parentNode.insertBefore(wf, s);
       })();
     </script>
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+    <script>
+      window['__onGCastApiAvailable'] = function(isAvailable) {
+        if (isAvailable) {
+          initializeCastApi();
+        }
+      };
+      let initializeCastApi = function() {
+        console.log('init cast api');
+        cast.framework.CastContext.getInstance().setOptions({
+          receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+          autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+        });
+      };
+      
+      window.castMedia = function (url) {
+        const mediaInfo = new chrome.cast.media.MediaInfo(url, 'video/mp4');
+        const request = new chrome.cast.media.LoadRequest(mediaInfo);
+        console.log(cast.framework.CastContext.getInstance());
+        cast.framework.CastContext.getInstance().requestSession().then((req) => {
+          console.log(req);
+          const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+          castSession.loadMedia(request).then(
+            () => { console.log('Load succeed'); },
+            (errorCode) => { console.log('Error code: ' + errorCode); });
+        });
+      }
+      
+    </script>
 </head>
 <body>
 <noscript>

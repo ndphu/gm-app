@@ -20,11 +20,13 @@ class WatchPage extends React.Component {
     this.state = {
       item: null,
       videoError: false,
+      showCastButton: false,
     };
     this.onEpisodeClick.bind(this);
     this.handleGenreClick.bind(this);
     this.handleActorClick.bind(this);
     this.handleReloadEpisodeList.bind(this);
+    this.onCastClick.bind(this);
   }
   
   componentDidMount = () => {
@@ -37,6 +39,9 @@ class WatchPage extends React.Component {
     if (prevSource !== currentSource && this.refs.player) {
       this.refs.player.load();
       this.refs.player.play();
+      this.setState({
+        showCastButton: true
+      });
     }
   }
   
@@ -105,6 +110,10 @@ class WatchPage extends React.Component {
       }
     }
   }
+
+  onCastClick = () => {
+    window.castMedia(this.getVideoSource());
+  };
   
   onVideoError = () => {
     this.setState({
@@ -203,6 +212,10 @@ class WatchPage extends React.Component {
           {this.state.videoError ?
             <h4 style={{color: 'crimson', paddingTop: 16, paddingBottom: 16}}>Đang tải video... Đợi chút nha...</h4> :
             <div style={{height: 16}}/>}
+          {!this.state.videoError && this.state.showCastButton && (
+            <RaisedButton label={'Cast To Device'} style={{marginTop: 16, marginBottom: 16}} onClick={this.onCastClick}/>
+          )
+          }
           <Player
             ref={'player'}
             playsInline={true}

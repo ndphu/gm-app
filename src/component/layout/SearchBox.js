@@ -15,9 +15,11 @@ const styles = {
     color: white,
     backgroundColor: blue500,
     borderRadius: 2,
-    height: 35,
-    marginTop: 10,
-    padding: 6,
+    maxHeight: 34,
+    minHeight: 34,
+    padding: 4,
+    width: '100%',
+    marginTop: 11,
   },
   inputStyle: {
     color: white,
@@ -30,6 +32,7 @@ const styles = {
   },
   containerStyle: {
     lineHeight: 0,
+    marginRight: 58,
   }
 };
 
@@ -52,7 +55,6 @@ class SearchBox extends React.Component {
           onKeyPress={this.onSearchKeyPress}
           hintText={this.props.searchHint}
           underlineShow={false}
-          fullWidth={true}
           style={styles.textField}
           inputStyle={styles.inputStyle}
           hintStyle={styles.hintStyle}

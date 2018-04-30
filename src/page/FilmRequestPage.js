@@ -93,6 +93,7 @@ class FilmRequestPage extends React.Component {
                      searchHint={'Tìm theo tên phim'}/>
           <RadioButtonGroup defaultSelected="0"
                             style={{marginTop: 16}}
+                            name={'request-from-source'}
                             onChange={this.onSourceChange}>
             <RadioButton
               value="0"

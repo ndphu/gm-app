@@ -89,6 +89,10 @@ class WatchPage extends React.Component {
   getVideoSource = () => {
     return this.state.episode ? this.state.episode.videoSource : '';
   };
+
+  getSrt = () => {
+    return this.state.episode ? this.state.episode.srt : null;
+  };
   
   onEpisodeClick = (episode) => {
     this.changeEpisode(episode);
@@ -112,7 +116,13 @@ class WatchPage extends React.Component {
   }
 
   onCastClick = () => {
-    window.castMedia(this.getVideoSource());
+    let chromeCastRequest = window.getChromeCastRequest(this.getVideoSource(), this.getSrt());
+    window.getChromeCastSession().then((session) => {
+      session.loadMedia(chromeCastRequest);
+      if (this.refs.player) {
+        this.refs.player.pause();
+      }
+    });
   };
   
   onVideoError = () => {

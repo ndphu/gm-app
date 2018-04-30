@@ -25,6 +25,7 @@
             height: 100%;
             background-color: #212121;
         }
+
         .cssload-loader {
             width: 97px;
             height: 19px;
@@ -205,32 +206,54 @@
     </script>
     <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
     <script>
-      window['__onGCastApiAvailable'] = function(isAvailable) {
+      window['__onGCastApiAvailable'] = function (isAvailable) {
         if (isAvailable) {
           initializeCastApi();
         }
       };
-      let initializeCastApi = function() {
+      let initializeCastApi = function () {
         console.log('init cast api');
         cast.framework.CastContext.getInstance().setOptions({
           receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
           autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
         });
       };
-      
-      window.castMedia = function (url) {
+
+      window.getChromeCastRequest = function(url, srt) {
         const mediaInfo = new chrome.cast.media.MediaInfo(url, 'video/mp4');
-        const request = new chrome.cast.media.LoadRequest(mediaInfo);
-        console.log(cast.framework.CastContext.getInstance());
-        cast.framework.CastContext.getInstance().requestSession().then((req) => {
-          console.log(req);
-          const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-          castSession.loadMedia(request).then(
-            () => { console.log('Load succeed'); },
-            (errorCode) => { console.log('Error code: ' + errorCode); });
-        });
-      }
-      
+        mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
+        mediaInfo.customData = null;
+        mediaInfo.streamType = chrome.cast.media.StreamType.BUFFERED;
+        if (srt) {
+          console.log('loading vietsub at ' + srt);
+          const vietsub = new chrome.cast.media.Track(1, // track ID
+            chrome.cast.media.TrackType.TEXT);
+          vietsub.trackContentId = srt;
+          vietsub.trackContentType = 'text/srt';
+          vietsub.subtype = chrome.cast.media.TextTrackType.SUBTITLES;
+          vietsub.name = 'Vietnamese Subtitles';
+          vietsub.language = 'vi-VI';
+          vietsub.customData = null;
+          mediaInfo.tracks = [vietsub];
+          mediaInfo.textTrackStyle = new chrome.cast.media.TextTrackStyle();
+        }
+
+        return new chrome.cast.media.LoadRequest(mediaInfo);
+      };
+
+      window.getChromeCastSession = function () {
+        return new Promise((resolve, reject) => {
+          const ses = cast.framework.CastContext.getInstance().getCurrentSession();
+          if (ses) {
+            resolve(ses);
+          } else {
+            cast.framework.CastContext.getInstance().requestSession().then(() => {
+              resolve(cast.framework.CastContext.getInstance().getCurrentSession());
+            });
+          }
+        })
+      };
+
     </script>
 </head>
 <body>

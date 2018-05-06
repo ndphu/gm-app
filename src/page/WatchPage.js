@@ -234,9 +234,6 @@ class WatchPage extends React.Component {
             onError={this.onVideoError}
             onEnded={this.onVideoEnded}
             src={this.getVideoSource()}>
-            {this.state.episode && this.state.episode.srt &&
-            <track src={`${apiConfig.baseUrl}/item/${this.state.episode._id}/srt`} default/>
-            }
             <BigPlayButton position="center"/>
           </Player>
           {

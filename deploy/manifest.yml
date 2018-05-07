@@ -1,6 +1,7 @@
 ---
 applications:
-- name: gm-app-v2
-  memory: 64M
-  instances: 1
-  random-route: true
+- name: gm-app
+  memory: 16M
+  instances: 2
+  command: gm-app
+

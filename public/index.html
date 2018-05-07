@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Phim Lậu Online</title>
+    <title>Movie Hub</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -12,28 +12,263 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        #load-screen {
+            z-index: 99999;
+            position: fixed;
+            top: 0;
+            opacity: 0.85;
+            width: 100%;
+            height: 100%;
+            background-color: #212121;
+        }
+
+        .cssload-loader {
+            width: 97px;
+            height: 19px;
+            padding-top: 140px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+        }
+
+        .cssload-loader > div {
+            content: " ";
+            width: 19px;
+            height: 19px;
+            background: rgb(33, 150, 243);
+            border-radius: 100%;
+            position: absolute;
+            animation: cssload-shift 2.3s linear infinite;
+            -o-animation: cssload-shift 2.3s linear infinite;
+            -ms-animation: cssload-shift 2.3s linear infinite;
+            -webkit-animation: cssload-shift 2.3s linear infinite;
+            -moz-animation: cssload-shift 2.3s linear infinite;
+        }
+
+        .cssload-loader > div:nth-of-type(1) {
+            animation-delay: -0.46s;
+            -o-animation-delay: -0.46s;
+            -ms-animation-delay: -0.46s;
+            -webkit-animation-delay: -0.46s;
+            -moz-animation-delay: -0.46s;
+        }
+
+        .cssload-loader > div:nth-of-type(2) {
+            animation-delay: -0.92s;
+            -o-animation-delay: -0.92s;
+            -ms-animation-delay: -0.92s;
+            -webkit-animation-delay: -0.92s;
+            -moz-animation-delay: -0.92s;
+        }
+
+        .cssload-loader > div:nth-of-type(3) {
+            animation-delay: -1.38s;
+            -o-animation-delay: -1.38s;
+            -ms-animation-delay: -1.38s;
+            -webkit-animation-delay: -1.38s;
+            -moz-animation-delay: -1.38s;
+        }
+
+        .cssload-loader > div:nth-of-type(4) {
+            animation-delay: -1.84s;
+            -o-animation-delay: -1.84s;
+            -ms-animation-delay: -1.84s;
+            -webkit-animation-delay: -1.84s;
+            -moz-animation-delay: -1.84s;
+        }
+
+        @keyframes cssload-shift {
+            0% {
+                left: -58px;
+                opacity: 0;
+                background-color: rgb(255, 255, 0);
+            }
+            10% {
+                left: 0;
+                opacity: 1;
+            }
+            90% {
+                left: 97px;
+                opacity: 1;
+            }
+            100% {
+                left: 156px;
+                background-color: rgb(255, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        @-o-keyframes cssload-shift {
+            0% {
+                left: -58px;
+                opacity: 0;
+                background-color: rgb(255, 255, 0);
+            }
+            10% {
+                left: 0;
+                opacity: 1;
+            }
+            90% {
+                left: 97px;
+                opacity: 1;
+            }
+            100% {
+                left: 156px;
+                background-color: rgb(255, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        @-ms-keyframes cssload-shift {
+            0% {
+                left: -58px;
+                opacity: 0;
+                background-color: rgb(255, 255, 0);
+            }
+            10% {
+                left: 0;
+                opacity: 1;
+            }
+            90% {
+                left: 97px;
+                opacity: 1;
+            }
+            100% {
+                left: 156px;
+                background-color: rgb(255, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes cssload-shift {
+            0% {
+                left: -58px;
+                opacity: 0;
+                background-color: rgb(255, 255, 0);
+            }
+            10% {
+                left: 0;
+                opacity: 1;
+            }
+            90% {
+                left: 97px;
+                opacity: 1;
+            }
+            100% {
+                left: 156px;
+                background-color: rgb(255, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        @-moz-keyframes cssload-shift {
+            0% {
+                left: -58px;
+                opacity: 0;
+                background-color: rgb(255, 255, 0);
+            }
+            10% {
+                left: 0;
+                opacity: 1;
+            }
+            90% {
+                left: 97px;
+                opacity: 1;
+            }
+            100% {
+                left: 156px;
+                background-color: rgb(255, 0, 0);
+                opacity: 0;
+            }
+        }
+    </style>
+    <script>
+      var WebFontConfig = {
+        google: {families: ['Roboto:400,300,500:latin']}
+      };
+      (function () {
+        var wf = document.createElement('script');
+        wf.src = ('https:' === document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+    <script>
+      window['__onGCastApiAvailable'] = function (isAvailable) {
+        if (isAvailable) {
+          initializeCastApi();
+        }
+      };
+      let initializeCastApi = function () {
+        console.log('init cast api');
+        cast.framework.CastContext.getInstance().setOptions({
+          receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+          autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+        });
+      };
+
+      window.getChromeCastRequest = function(url, srt) {
+        const mediaInfo = new chrome.cast.media.MediaInfo(url, 'video/mp4');
+        mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
+        mediaInfo.customData = null;
+        mediaInfo.streamType = chrome.cast.media.StreamType.BUFFERED;
+        if (srt) {
+          console.log('loading vietsub at ' + srt);
+          const vietsub = new chrome.cast.media.Track(1, // track ID
+            chrome.cast.media.TrackType.TEXT);
+          vietsub.trackContentId = srt;
+          vietsub.trackContentType = 'text/srt';
+          vietsub.subtype = chrome.cast.media.TextTrackType.SUBTITLES;
+          vietsub.name = 'Vietnamese Subtitles';
+          vietsub.language = 'vi-VI';
+          vietsub.customData = null;
+          mediaInfo.tracks = [vietsub];
+          mediaInfo.textTrackStyle = new chrome.cast.media.TextTrackStyle();
+        }
+
+        return new chrome.cast.media.LoadRequest(mediaInfo);
+      };
+
+      window.getChromeCastSession = function () {
+        return new Promise((resolve, reject) => {
+          const ses = cast.framework.CastContext.getInstance().getCurrentSession();
+          if (ses) {
+            resolve(ses);
+          } else {
+            cast.framework.CastContext.getInstance().requestSession().then(() => {
+              resolve(cast.framework.CastContext.getInstance().getCurrentSession());
+            });
+          }
+        })
+      };
+
+    </script>
 </head>
 <body>
 <noscript>
     You need to enable JavaScript to run this app.
 </noscript>
+<div id="load-screen">
+    <div class="cssload-loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
 <div id="root"></div>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script>
-  var WebFontConfig = {
-    google: { families: [ 'Roboto:400,300,500:latin' ] }
-  };
-  (function() {
-    var wf = document.createElement('script');
-    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'true';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
-  })();
-</script>
 </body>
 </html>

@@ -43,6 +43,14 @@ class Api {
     });
   };
 
+
+  getFetch(path) {
+    return fetch(config.baseUrl + path, {
+      method: 'GET',
+      headers: this.buildHeaders()
+    });
+  }
+
   post = (path, body) => {
     const input = config.baseUrl + path;
     return fetch(input, {
@@ -62,6 +70,7 @@ class Api {
     localStorage.clear();
     window.location.href = config.unauthorizedPath;
   }
+
 }
 
 const api = new Api();

@@ -10,7 +10,7 @@ class ActorService {
   };
   
   getItemsByActor = (actor, page, size) => {
-    return api.get(`/actor/${actor._id}/items?page=${page}&size=${size}`);
+    return api.get(`/actor/byKey/${actor.key}/items?page=${page}&size=${size}`);
   };
 }
 

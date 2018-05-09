@@ -1,7 +1,7 @@
 ---
 applications:
-- name: gm-app
+- name: gm-app-v3
   memory: 16M
-  instances: 2
-  command: gm-app
+  instances: 1
+  command: gm-app-v3
 
